@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ibtissame Abdoussi — Embedded Systems Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060c14;
+    --surface: #0c1623;
+    --border: #1a2d45;
+    --teal: #00e5c8;
+    --teal-dim: rgba(0,229,200,0.10);
+    --amber: #f59e0b;
+    --muted: #4a6580;
+    --text: #cde4f5;
+    --text-soft: #7a9bb8;
+    --white: #eef6ff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      linear-gradient(rgba(0,229,200,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,229,200,0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 60px;
+    background: rgba(6,12,20,0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--teal); letter-spacing: 0.08em; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-soft); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* HERO */
+  #hero {
+    position: relative; min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 130px 60px 80px; overflow: hidden;
+    gap: 60px;
+  }
+  .hero-glow {
+    position: absolute; top: 20%; right: 10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,229,200,0.13) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; flex: 1; max-width: 620px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    color: var(--teal); letter-spacing: 0.12em; text-transform: uppercase;
+    border: 1px solid rgba(0,229,200,0.3); padding: 6px 14px; border-radius: 2px;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-tag::before {
+    content: ''; width: 6px; height: 6px;
+    background: var(--teal); border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(44px, 6vw, 82px);
+    font-weight: 800; line-height: 1.0;
+    color: var(--white); letter-spacing: -0.02em;
+    animation: fadeUp 0.7s 0.1s ease both;
+  }
+  .hero-name span { color: var(--teal); }
+  .hero-title {
+    font-family: 'IBM Plex Mono', monospace; font-size: 13px;
+    color: var(--amber); margin: 20px 0 24px; letter-spacing: 0.06em;
+    animation: fadeUp 0.7s 0.2s ease both;
+  }
+  .hero-desc {
+    font-size: 15px; color: var(--text-soft); max-width: 500px;
+    line-height: 1.8; animation: fadeUp 0.7s 0.3s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 16px; margin-top: 36px; flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.4s ease both;
+  }
+  .btn-primary {
+    background: var(--teal); color: #060c14;
+    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px;
+    padding: 13px 28px; border: none; cursor: pointer; letter-spacing: 0.06em;
+    text-decoration: none; display: inline-block;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-primary:hover { background: #00ccb4; transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent; color: var(--teal);
+    font-family: 'Syne', sans-serif; font-weight: 600; font-size: 13px;
+    padding: 12px 28px; border: 1px solid rgba(0,229,200,0.4); cursor: pointer;
+    letter-spacing: 0.06em; text-decoration: none; display: inline-block;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--teal); background: var(--teal-dim); }
+
+  /* HERO PHOTO */
+  .hero-photo-wrap {
+    position: relative; z-index: 2; flex-shrink: 0;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-photo-frame {
+    width: 280px; height: 340px;
+    border: 2px solid rgba(0,229,200,0.35);
+    position: relative; overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+  }
+  .hero-photo-frame img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+    filter: grayscale(20%) contrast(1.05);
+    transition: filter 0.4s; cursor: zoom-in;
+  }
+  .hero-photo-frame:hover img { filter: grayscale(0%) contrast(1.1); }
+  .photo-placeholder {
+    width: 100%; height: 100%;
+    background: var(--surface);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 10px; cursor: pointer; position: relative;
+  }
+  .photo-placeholder-icon { font-size: 40px; opacity: 0.4; }
+  .photo-placeholder-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    color: var(--muted); letter-spacing: 0.1em; text-align: center; line-height: 1.8;
+  }
+  .photo-placeholder input[type="file"] {
+    position: absolute; inset: 0; opacity: 0; cursor: pointer;
+  }
+  .hero-photo-wrap::before, .hero-photo-wrap::after {
+    content: ''; position: absolute;
+    width: 20px; height: 20px; border-color: var(--teal); border-style: solid;
+  }
+  .hero-photo-wrap::before { top: -8px; left: -8px; border-width: 2px 0 0 2px; }
+  .hero-photo-wrap::after { bottom: -8px; right: -8px; border-width: 0 2px 2px 0; }
+
+  .hero-stats {
+    display: flex; gap: 36px; margin-top: 50px;
+    animation: fadeUp 0.7s 0.5s ease both;
+  }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800; color: var(--white); }
+  .stat-num span { color: var(--teal); }
+  .stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; padding: 100px 60px; }
+  .section-header { display: flex; align-items: center; gap: 20px; margin-bottom: 60px; }
+  .section-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--teal); letter-spacing: 0.1em; }
+  .section-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--border), transparent); }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(26px, 4vw, 42px); font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
+
+  /* SKILLS */
+  #skills { background: var(--surface); }
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; }
+  .skill-card {
+    background: var(--bg); padding: 30px; border: 1px solid var(--border);
+    position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s;
+  }
+  .skill-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--teal); transition: height 0.4s ease; }
+  .skill-card:hover { border-color: rgba(0,229,200,0.4); transform: translateY(-3px); }
+  .skill-card:hover::before { height: 100%; }
+  .skill-icon { font-size: 22px; margin-bottom: 12px; }
+  .skill-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 3px 10px; border: 1px solid var(--border); color: var(--text-soft); letter-spacing: 0.04em; }
+  .tag-teal { border-color: rgba(0,229,200,0.3); color: var(--teal); }
+  .tag-amber { border-color: rgba(245,158,11,0.3); color: var(--amber); }
+
+  /* PROJECTS */
+  #projects { background: var(--bg); }
+  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .project-card {
+    background: var(--surface); border: 1px solid var(--border);
+    position: relative; overflow: hidden; display: flex; flex-direction: column;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .project-card:hover { border-color: rgba(0,229,200,0.4); transform: translateY(-4px); }
+  .project-card.featured { grid-column: span 2; border-color: rgba(0,229,200,0.2); }
+
+  /* Album */
+  .project-album { position: relative; width: 100%; background: #080f1a; border-bottom: 1px solid var(--border); overflow: hidden; }
+  .project-card.featured .project-album { height: 260px; }
+  .project-card:not(.featured) .project-album { height: 200px; }
+  .album-slides { display: flex; height: 100%; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); }
+  .album-slide { min-width: 100%; height: 100%; flex-shrink: 0; position: relative; }
+  .album-slide img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
+  .album-slide.placeholder {
+    background: var(--surface); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 8px; cursor: pointer;
+    border: 2px dashed rgba(0,229,200,0.12);
+  }
+  .album-slide.placeholder .ph-icon { font-size: 28px; opacity: 0.3; }
+  .album-slide.placeholder .ph-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+    color: var(--muted); letter-spacing: 0.1em; text-align: center; line-height: 1.8;
+  }
+  .album-slide.placeholder input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .album-controls {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 12px;
+    background: linear-gradient(to top, rgba(6,12,20,0.85), transparent);
+  }
+  .album-dots { display: flex; gap: 5px; }
+  .album-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: rgba(0,229,200,0.3); cursor: pointer; border: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .album-dot.active { background: var(--teal); transform: scale(1.4); }
+  .album-arrows { display: flex; gap: 6px; }
+  .album-btn {
+    background: rgba(0,229,200,0.1); border: 1px solid rgba(0,229,200,0.25);
+    color: var(--teal); width: 26px; height: 26px; cursor: pointer; font-size: 14px;
+    display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+  }
+  .album-btn:hover { background: rgba(0,229,200,0.25); }
+  .album-counter { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-soft); letter-spacing: 0.06em; }
+
+  /* Project body */
+  .project-body { padding: 28px 30px 30px; flex: 1; display: flex; flex-direction: column; }
+  .project-badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--amber); border: 1px solid rgba(245,158,11,0.3); padding: 4px 10px; margin-bottom: 14px; letter-spacing: 0.08em; }
+  .project-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .project-title { font-family: 'Syne', sans-serif; font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 12px; line-height: 1.3; }
+  .project-desc { font-size: 13px; color: var(--text-soft); line-height: 1.75; margin-bottom: 18px; flex: 1; }
+  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* EDUCATION */
+  #education { background: var(--surface); }
+  .edu-list { display: flex; flex-direction: column; position: relative; }
+  .edu-list::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--teal), var(--border), transparent); }
+  .edu-item { display: flex; gap: 40px; padding: 36px 0 36px 60px; border-bottom: 1px solid var(--border); position: relative; }
+  .edu-item:last-child { border-bottom: none; }
+  .edu-dot { position: absolute; left: 14px; top: 40px; width: 13px; height: 13px; border: 2px solid var(--teal); background: var(--bg); border-radius: 50%; }
+  .edu-year { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--teal); letter-spacing: 0.08em; white-space: nowrap; min-width: 80px; padding-top: 4px; }
+  .edu-degree { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+  .edu-school { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--teal); margin-bottom: 8px; }
+  .edu-desc { font-size: 13px; color: var(--text-soft); }
+
+  /* LANGUAGES */
+  .lang-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .lang-card { background: var(--bg); border: 1px solid var(--border); padding: 26px 18px; text-align: center; transition: border-color 0.3s, background 0.3s; }
+  .lang-card:hover { border-color: rgba(0,229,200,0.4); background: var(--teal-dim); }
+  .lang-flag { font-size: 30px; margin-bottom: 10px; }
+  .lang-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 5px; }
+  .lang-level { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--teal); letter-spacing: 0.06em; }
+
+  /* CONTACT */
+  #contact { background: var(--bg); text-align: center; }
+  .contact-inner { max-width: 600px; margin: 0 auto; }
+  .contact-title { font-family: 'Syne', sans-serif; font-size: clamp(34px, 5vw, 62px); font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 18px; }
+  .contact-title span { color: var(--teal); }
+  .contact-sub { font-size: 15px; color: var(--text-soft); margin-bottom: 36px; }
+  .contact-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .contact-link { display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-soft); text-decoration: none; border: 1px solid var(--border); padding: 12px 20px; transition: color 0.2s, border-color 0.2s; letter-spacing: 0.04em; }
+  .contact-link:hover { color: var(--teal); border-color: rgba(0,229,200,0.4); }
+
+  footer { padding: 28px 60px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; }
+  .footer-text { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
+
+  /* LIGHTBOX */
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+  .lightbox.open { opacity: 1; pointer-events: all; }
+  .lightbox img { max-width: 88vw; max-height: 86vh; object-fit: contain; border: 1px solid rgba(0,229,200,0.2); }
+  .lb-close { position: absolute; top: 20px; right: 28px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--teal); cursor: pointer; background: none; border: none; letter-spacing: 0.06em; }
+  .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,229,200,0.1); border: 1px solid rgba(0,229,200,0.3); color: var(--teal); font-size: 20px; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+  .lb-prev { left: 20px; } .lb-next { right: 20px; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav, section, footer { padding-left: 24px; padding-right: 24px; }
+    #hero { padding: 120px 24px 80px; flex-direction: column-reverse; align-items: flex-start; gap: 32px; }
+    .hero-photo-frame { width: 160px; height: 200px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; }
+    .lang-grid { grid-template-columns: repeat(2, 1fr); }
+    nav { padding: 16px 24px; }
+    .nav-links { gap: 16px; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .edu-item { flex-direction: column; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">// ibtissame.abdoussi</div>
+  <ul class="nav-links">
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+
+  <!-- PROFILE PHOTO — swap placeholder div with <img src="your-photo.jpg"> when ready -->
+  <div class="hero-photo-wrap">
+    <div class="hero-photo-frame" id="heroPhotoFrame">
+      <div class="photo-placeholder" id="heroPlaceholder">
+        <div class="photo-placeholder-icon">👤</div>
+        <div class="photo-placeholder-label">YOUR PHOTO<br>Click to upload<br><span style="opacity:.5;font-size:8px;">or replace src in HTML</span></div>
+        <input type="file" accept="image/*" onchange="loadHeroPhoto(this)">
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Available for PFA Internship</div>
+    <h1 class="hero-name">Ibtissame<br><span>Abdoussi</span></h1>
+    <p class="hero-title">// Embedded Systems · IoT · Firmware · PCB Design</p>
+    <p class="hero-desc">
+      4th-year engineering student at ENSA Oujda, specializing in Electronic,
+      Computer & Network Systems. I design, build and deploy smart embedded solutions —
+      from microcontrollers and PCBs to full-stack IoT platforms.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="mailto:ibtissam.abdoussi.23@ump.ac.ma" class="btn-ghost">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">4<span>+</span></div><div class="stat-label">Major Projects</div></div>
+      <div class="stat"><div class="stat-num">4<span>×</span></div><div class="stat-label">Languages Spoken</div></div>
+      <div class="stat"><div class="stat-num">🏆</div><div class="stat-label">IFMEREE 2025</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">01 /</span>
+    <h2 class="section-title">Technical Stack</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal"><div class="skill-icon">🔌</div><div class="skill-name">Microcontrollers & Hardware</div><p style="font-size:13px;color:var(--text-soft);margin-bottom:4px;">Embedded design with real hardware</p><div class="skill-tags"><span class="tag tag-teal">Arduino UNO</span><span class="tag tag-teal">ESP32</span><span class="tag tag-teal">ESP8266</span><span class="tag tag-teal">PIC16F</span><span class="tag tag-teal">PIC18F</span></div></div>
+    <div class="skill-card reveal"><div class="skill-icon">💻</div><div class="skill-name">Programming Languages</div><p style="font-size:13px;color:var(--text-soft);margin-bottom:4px;">From low-level to OOP</p><div class="skill-tags"><span class="tag tag-teal">C / C++</span><span class="tag tag-teal">Embedded C</span><span class="tag tag-teal">Assembly</span><span class="tag">Python</span><span class="tag">Java</span><span class="tag">JavaScript</span></div></div>
+    <div class="skill-card reveal"><div class="skill-icon">🛠️</div><div class="skill-name">PCB & Circuit Design</div><p style="font-size:13px;color:var(--text-soft);margin-bottom:4px;">From schematic to physical board</p><div class="skill-tags"><span class="tag tag-amber">Proteus</span><span class="tag tag-amber">EasyEDA</span><span class="tag tag-amber">Tinkercad</span></div></div>
+    <div class="skill-card reveal"><div class="skill-icon">🌐</div><div class="skill-name">Web & Backend</div><p style="font-size:13px;color:var(--text-soft);margin-bottom:4px;">Full-stack IoT dashboards</p><div class="skill-tags"><span class="tag">Django</span><span class="tag">REST API</span><span class="tag">Flask</span><span class="tag">HTML5</span><span class="tag">CSS</span></div></div>
+    <div class="skill-card reveal"><div class="skill-icon">📊</div><div class="skill-name">Control & Simulation</div><p style="font-size:13px;color:var(--text-soft);margin-bottom:4px;">Systems analysis & controller design</p><div class="skill-tags"><span class="tag tag-amber">MATLAB</span><span class="tag tag-amber">Simulink</span><span class="tag">PID / PI / PD</span><span class="tag">Linux</span></div></div>
+    <div class="skill-card reveal"><div class="skill-icon">🎨</div><div class="skill-name">Creative & Multimedia</div><p style="font-size:13px;color:var(--text-soft);margin-bottom:4px;">Engineering meets creativity</p><div class="skill-tags"><span class="tag">Photography</span><span class="tag">Video Editing</span><span class="tag">Graphic Design</span><span class="tag">3D Modeling</span></div></div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">02 /</span>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+
+    <!-- P1 — 4 slots -->
+    <div class="project-card featured reveal" data-album="album-1">
+      <div class="project-album">
+        <div class="album-slides" id="album-1-slides">
+          <div class="album-slide placeholder"><div class="ph-icon">🌲</div><div class="ph-label">PHOTO 1 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-1',0)"></div>
+          <div class="album-slide placeholder"><div class="ph-icon">📷</div><div class="ph-label">PHOTO 2 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-1',1)"></div>
+          <div class="album-slide placeholder"><div class="ph-icon">📷</div><div class="ph-label">PHOTO 3 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-1',2)"></div>
+          <div class="album-slide placeholder"><div class="ph-icon">📷</div><div class="ph-label">PHOTO 4 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-1',3)"></div>
+        </div>
+        <div class="album-controls">
+          <div class="album-dots" id="album-1-dots">
+            <button class="album-dot active" onclick="goSlide('album-1',0)"></button>
+            <button class="album-dot" onclick="goSlide('album-1',1)"></button>
+            <button class="album-dot" onclick="goSlide('album-1',2)"></button>
+            <button class="album-dot" onclick="goSlide('album-1',3)"></button>
+          </div>
+          <span class="album-counter" id="album-1-counter">1 / 4</span>
+          <div class="album-arrows">
+            <button class="album-btn" onclick="prevSlide('album-1')">‹</button>
+            <button class="album-btn" onclick="nextSlide('album-1')">›</button>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-badge">🏆 Best Prototype · IFMEREE 2025</div>
+        <div class="project-num">P.01</div>
+        <div class="project-title">Forest Fire Detection & Alert System</div>
+        <p class="project-desc">A complete embedded system for early forest fire detection using computer vision and image recognition. Integrated a real-time alert pipeline via a Flask web interface, with IoT-based emergency management. Won the "Best Prototype" trophy at IFMEREE 2025.</p>
+        <div class="project-stack"><span class="tag tag-teal">Computer Vision</span><span class="tag tag-teal">IoT</span><span class="tag tag-teal">Flask</span><span class="tag tag-teal">Embedded C</span><span class="tag">Real-time Alerts</span></div>
+      </div>
+    </div>
+
+    <!-- P2 — 3 slots -->
+    <div class="project-card reveal" data-album="album-2">
+      <div class="project-album">
+        <div class="album-slides" id="album-2-slides">
+          <div class="album-slide placeholder"><div class="ph-icon">❄️</div><div class="ph-label">PHOTO 1 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-2',0)"></div>
+          <div class="album-slide placeholder"><div class="ph-icon">📷</div><div class="ph-label">PHOTO 2 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-2',1)"></div>
+          <div class="album-slide placeholder"><div class="ph-icon">📷</div><div class="ph-label">PHOTO 3 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-2',2)"></div>
+        </div>
+        <div class="album-controls">
+          <div class="album-dots" id="album-2-dots">
+            <button class="album-dot active" onclick="goSlide('album-2',0)"></button>
+            <button class="album-dot" onclick="goSlide('album-2',1)"></button>
+            <button class="album-dot" onclick="goSlide('album-2',2)"></button>
+          </div>
+          <span class="album-counter" id="album-2-counter">1 / 3</span>
+          <div class="album-arrows">
+            <button class="album-btn" onclick="prevSlide('album-2')">‹</button>
+            <button class="album-btn" onclick="nextSlide('album-2')">›</button>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-num">P.02</div>
+        <div class="project-title">IoT Cold Chain Monitoring</div>
+        <p class="project-desc">Full-stack IoT system for real-time monitoring of medical lab refrigerators. DHT11 on ESP8266 → Django REST API → live dashboard → automated multi-channel alerts (Email, Telegram, WhatsApp) with cloud deployment.</p>
+        <div class="project-stack"><span class="tag tag-teal">ESP8266</span><span class="tag tag-teal">DHT11</span><span class="tag">Django REST</span><span class="tag">Cloud</span><span class="tag">Telegram API</span></div>
+      </div>
+    </div>
+
+    <!-- P3 — 3 slots -->
+    <div class="project-card reveal" data-album="album-3">
+      <div class="project-album">
+        <div class="album-slides" id="album-3-slides">
+          <div class="album-slide placeholder"><div class="ph-icon">🏡</div><div class="ph-label">PHOTO 1 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-3',0)"></div>
+          <div class="album-slide placeholder"><div class="ph-icon">📷</div><div class="ph-label">PHOTO 2 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-3',1)"></div>
+          <div class="album-slide placeholder"><div class="ph-icon">📷</div><div class="ph-label">PHOTO 3 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-3',2)"></div>
+        </div>
+        <div class="album-controls">
+          <div class="album-dots" id="album-3-dots">
+            <button class="album-dot active" onclick="goSlide('album-3',0)"></button>
+            <button class="album-dot" onclick="goSlide('album-3',1)"></button>
+            <button class="album-dot" onclick="goSlide('album-3',2)"></button>
+          </div>
+          <span class="album-counter" id="album-3-counter">1 / 3</span>
+          <div class="album-arrows">
+            <button class="album-btn" onclick="prevSlide('album-3')">‹</button>
+            <button class="album-btn" onclick="nextSlide('album-3')">›</button>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-num">P.03</div>
+        <div class="project-title">Intelligent Ecological House</div>
+        <p class="project-desc">Smart home prototype with automated roof, solar tracker, and rainwater harvesting. Energy optimization, presence-triggered lighting, and garden irrigation from collected water — fully integrated IoT hardware and software.</p>
+        <div class="project-stack"><span class="tag tag-teal">IoT</span><span class="tag tag-teal">Solar Tracking</span><span class="tag">Automation</span><span class="tag">Arduino</span><span class="tag">Sensors</span></div>
+      </div>
+    </div>
+
+    <!-- P4 — 2 slots -->
+    <div class="project-card reveal" data-album="album-4">
+      <div class="project-album">
+        <div class="album-slides" id="album-4-slides">
+          <div class="album-slide placeholder"><div class="ph-icon">📊</div><div class="ph-label">PHOTO 1 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-4',0)"></div>
+          <div class="album-slide placeholder"><div class="ph-icon">📷</div><div class="ph-label">PHOTO 2 · Click to upload</div><input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-4',1)"></div>
+        </div>
+        <div class="album-controls">
+          <div class="album-dots" id="album-4-dots">
+            <button class="album-dot active" onclick="goSlide('album-4',0)"></button>
+            <button class="album-dot" onclick="goSlide('album-4',1)"></button>
+          </div>
+          <span class="album-counter" id="album-4-counter">1 / 2</span>
+          <div class="album-arrows">
+            <button class="album-btn" onclick="prevSlide('album-4')">‹</button>
+            <button class="album-btn" onclick="nextSlide('album-4')">›</button>
+          </div>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-num">P.04</div>
+        <div class="project-title">Dynamic Systems Control — MATLAB/Simulink</div>
+        <p class="project-desc">Complete study of a linear continuous system: temporal & frequency analysis, PID/PI/PD controller synthesis, stability verification, and open/closed-loop performance validation against industrial criteria.</p>
+        <div class="project-stack"><span class="tag tag-amber">MATLAB</span><span class="tag tag-amber">Simulink</span><span class="tag">PID Control</span><span class="tag">System Modeling</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-num">03 /</span>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-list">
+    <div class="edu-item reveal"><div class="edu-dot"></div><div class="edu-year">2024 →</div><div><div class="edu-degree">Engineering Cycle — Electronic, Computer & Network Systems</div><div class="edu-school">École Nationale des Sciences Appliquées (ENSA) · Oujda, Morocco</div><div class="edu-desc">Specialization in embedded systems, IoT, PCB design, and network engineering.</div></div></div>
+    <div class="edu-item reveal"><div class="edu-dot"></div><div class="edu-year">2022–2024</div><div><div class="edu-degree">Integrated Preparatory Classes — Sciences & Engineering (STPI)</div><div class="edu-school">École Nationale des Sciences Appliquées (ENSA) · Oujda, Morocco</div><div class="edu-desc">Intensive 2-year foundation in mathematics, physics, and engineering sciences.</div></div></div>
+    <div class="edu-item reveal"><div class="edu-dot"></div><div class="edu-year">2022</div><div><div class="edu-degree">Scientific Baccalaureate — Physics, French Option</div><div class="edu-school">Lycée Al Badil Attarbaoui · Oujda</div><div class="edu-desc">Graduated with Mention Très Bien (Highest Honors).</div></div></div>
+  </div>
+
+  <div class="section-header reveal" style="margin-top:80px;">
+    <span class="section-num">04 /</span>
+    <h2 class="section-title">Languages</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="lang-grid">
+    <div class="lang-card reveal"><div class="lang-flag">🇲🇦</div><div class="lang-name">Arabic</div><div class="lang-level">Native / Bilingual</div></div>
+    <div class="lang-card reveal"><div class="lang-flag">🇫🇷</div><div class="lang-name">French</div><div class="lang-level">Fluent · B2</div></div>
+    <div class="lang-card reveal"><div class="lang-flag">🇬🇧</div><div class="lang-name">English</div><div class="lang-level">Fluent · B2</div></div>
+    <div class="lang-card reveal"><div class="lang-flag">🇪🇸</div><div class="lang-name">Spanish</div><div class="lang-level">Fluent · B2</div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <h2 class="contact-title reveal">Let's build<br><span>something great.</span></h2>
+    <p class="contact-sub reveal">Open to PFA internship opportunities in embedded systems, IoT, and electronics engineering.</p>
+    <div class="contact-links reveal">
+      <a class="contact-link" href="mailto:ibtissam.abdoussi.23@ump.ac.ma">✉ ibtissam.abdoussi.23@ump.ac.ma</a>
+      <a class="contact-link" href="tel:+212664520040">📞 +212 664 520 040</a>
+      <a class="contact-link" href="https://linkedin.com/in/ibtissame-abdoussi" target="_blank">🔗 LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-text">© 2025 Ibtissame Abdoussi · Oujda, Morocco</span>
+  <span class="footer-text">Embedded Systems · IoT · PCB</span>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">[ CLOSE ✕ ]</button>
+  <button class="lb-prev" onclick="lbNav(-1)">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-next" onclick="lbNav(1)">›</button>
+</div>
+
+<script>
+// ── HERO PHOTO ──
+function loadHeroPhoto(input) {
+  if (!input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const frame = document.getElementById('heroPhotoFrame');
+    frame.innerHTML = `<img src="${e.target.result}" alt="Ibtissame Abdoussi" onclick="openLightboxSingle('${e.target.result}')">`;
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// ── ALBUM STATE ──
+const albumState = {};
+function getAlbum(id) {
+  if (!albumState[id]) albumState[id] = { current: 0, photos: {} };
+  return albumState[id];
+}
+
+function updateAlbumUI(id) {
+  const slides = document.getElementById(`${id}-slides`).children;
+  const dots   = document.getElementById(`${id}-dots`).children;
+  const counter = document.getElementById(`${id}-counter`);
+  const idx = getAlbum(id).current;
+  document.getElementById(`${id}-slides`).style.transform = `translateX(-${idx * 100}%)`;
+  Array.from(dots).forEach((d, i) => d.classList.toggle('active', i === idx));
+  counter.textContent = `${idx + 1} / ${slides.length}`;
+}
+
+function goSlide(id, index) {
+  const len = document.getElementById(`${id}-slides`).children.length;
+  getAlbum(id).current = Math.max(0, Math.min(index, len - 1));
+  updateAlbumUI(id);
+}
+function nextSlide(id) {
+  const len = document.getElementById(`${id}-slides`).children.length;
+  getAlbum(id).current = (getAlbum(id).current + 1) % len;
+  updateAlbumUI(id);
+}
+function prevSlide(id) {
+  const len = document.getElementById(`${id}-slides`).children.length;
+  getAlbum(id).current = (getAlbum(id).current - 1 + len) % len;
+  updateAlbumUI(id);
+}
+
+function addSlidePhoto(input, albumId, slideIndex) {
+  if (!input.files[0]) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const src = e.target.result;
+    const slide = document.getElementById(`${albumId}-slides`).children[slideIndex];
+    slide.className = 'album-slide';
+    slide.innerHTML = `<img src="${src}" alt="Project photo" onclick="openLightboxAlbum('${albumId}', ${slideIndex})" style="cursor:zoom-in;">`;
+    getAlbum(albumId).photos[slideIndex] = src;
+    updateAlbumUI(albumId);
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+
+// ── LIGHTBOX ──
+let lbPhotos = [], lbIndex = 0;
+
+function openLightboxAlbum(albumId, clickedIndex) {
+  const photos = getAlbum(albumId).photos;
+  const keys = Object.keys(photos).map(Number).sort((a,b)=>a-b);
+  lbPhotos = keys.map(k => photos[k]);
+  lbIndex = keys.indexOf(clickedIndex);
+  if (lbIndex < 0) lbIndex = 0;
+  showLightbox();
+}
+
+function openLightboxSingle(src) {
+  lbPhotos = [src]; lbIndex = 0;
+  showLightbox();
+}
+
+function showLightbox() {
+  if (!lbPhotos.length) return;
+  document.getElementById('lb-img').src = lbPhotos[lbIndex];
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+function lbNav(dir) {
+  if (!lbPhotos.length) return;
+  lbIndex = (lbIndex + dir + lbPhotos.length) % lbPhotos.length;
+  document.getElementById('lb-img').src = lbPhotos[lbIndex];
+}
+
+document.getElementById('lightbox').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) closeLightbox();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') lbNav(1);
+  if (e.key === 'ArrowLeft') lbNav(-1);
+});
+
+// ── SCROLL REVEAL ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), entry.target.dataset.delay || 0);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.dataset.delay = (i % 4) * 80;
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
