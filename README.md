@@ -22,8 +22,8 @@ Plain HTML, CSS and JavaScript in a single file, with no framework and no build 
 ├── README.md
 └── images/
     ├── me.jpg
-    ├── WhatsApp Image 2026-04-26 at 23.10.23.jpeg
-    └── WhatsApp Image 2026-04-26 at 23.10.20.jpeg
+    ├── forest fire detection
+    └── SmartHome
 ```
 
 All photos live in the `images/` folder. The file names must match the ones used in `index.html`, otherwise the photos will not display.
