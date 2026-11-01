@@ -175,7 +175,7 @@ footer{padding:28px 60px;border-top:1px solid var(--border);display:flex;justify
 <section id="hero">
   <div class="hero-glow"></div>
   <div class="hero-photo-wrap">
-    <div class="hero-photo-frame"><img src="images/me.jpg" alt="Ibtissame Abdoussi" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='me.jpg'}" onclick="openLightboxSingle(this.src)"></div>
+    <div class="hero-photo-frame"><img src="images/me" alt="Ibtissame Abdoussi" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/me.jpg'}" onclick="openLightboxSingle(this.src)"></div>
   </div>
   <div class="hero-content">
     <div class="hero-tag">Seeking a 5-month end-of-studies internship (PFE)</div>
@@ -348,7 +348,7 @@ const PROJECTS = [
    title:'Connected medical cold chain monitoring',
    desc:`Complete IoT solution for continuous temperature and humidity monitoring of refrigerated units in medical analysis laboratories. DHT11/ESP8266 sensor node sending data to a Django REST API, with a real-time dashboard and automated alerts (Email, Telegram, WhatsApp).`,
    tags:['t|ESP8266','t|DHT11','n|Django REST','n|Cloud','n|Telegram API'],
-   slides:[['❄️','Medical cold chain monitoring','ESP8266 & Django REST API'],['📱','Web dashboard & Telegram/WhatsApp alerts','Click to add a photo']]}
+   slides:[['📱','Cold chain real-time monitoring dashboard','','Dashboard_clodchain'],['📋','Cold chain incident history','','historique_incident_coldchain'],['❄️','Add a photo of the ESP8266 sensor node','Click to add a photo']]}
 ];
 
 document.getElementById('skillsGrid').innerHTML = SKILLS.map(s => `
