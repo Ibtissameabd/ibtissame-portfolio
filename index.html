@@ -1,388 +1,161 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ibtissame Abdoussi — Élève Ingénieure en Systèmes Embarqués, IoT & Robotique</title>
+<title>Ibtissame Abdoussi — Engineering Student in Embedded Systems, IoT & Robotics</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #060c14;
-    --surface: #0c1623;
-    --surface-light: #122033;
-    --border: #1a2d45;
-    --border-accent: rgba(0,229,200,0.3);
-    --teal: #00e5c8;
-    --teal-glow: rgba(0,229,200,0.18);
-    --teal-dim: rgba(0,229,200,0.10);
-    --amber: #f59e0b;
-    --amber-dim: rgba(245,158,11,0.12);
-    --muted: #4a6580;
-    --text: #cde4f5;
-    --text-soft: #85a5c2;
-    --white: #eef6ff;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    line-height: 1.7;
-    overflow-x: hidden;
-  }
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      linear-gradient(rgba(0,229,200,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,229,200,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none; z-index: 0;
-  }
-
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 18px 60px;
-    background: rgba(6,12,20,0.92);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--teal); letter-spacing: 0.08em; font-weight: 500; }
-  .nav-links { display: flex; gap: 28px; list-style: none; }
-  .nav-links a { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-soft); text-decoration: none; letter-spacing: 0.06em; transition: color 0.2s; }
-  .nav-links a:hover { color: var(--teal); }
-
-  /* HERO */
-  #hero {
-    position: relative; min-height: 100vh;
-    display: flex; align-items: center;
-    padding: 130px 60px 80px; overflow: hidden;
-    gap: 60px;
-  }
-  .hero-glow {
-    position: absolute; top: 15%; right: 10%;
-    width: 450px; height: 450px;
-    background: radial-gradient(circle, rgba(0,229,200,0.14) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-content { position: relative; z-index: 2; flex: 1; max-width: 650px; }
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-    color: var(--teal); letter-spacing: 0.10em; text-transform: uppercase;
-    border: 1px solid rgba(0,229,200,0.35); padding: 7px 16px; border-radius: 2px;
-    background: var(--teal-dim);
-    margin-bottom: 24px;
-    animation: fadeUp 0.6s ease both;
-  }
-  .hero-tag::before {
-    content: ''; width: 6px; height: 6px;
-    background: var(--teal); border-radius: 50%;
-    animation: pulse 2s infinite;
-  }
-  .hero-name {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(42px, 5.8vw, 78px);
-    font-weight: 800; line-height: 1.05;
-    color: var(--white); letter-spacing: -0.02em;
-    animation: fadeUp 0.7s 0.1s ease both;
-  }
-  .hero-name span { color: var(--teal); }
-  .hero-title {
-    font-family: 'IBM Plex Mono', monospace; font-size: 13px;
-    color: var(--amber); margin: 18px 0 20px; letter-spacing: 0.05em;
-    animation: fadeUp 0.7s 0.2s ease both;
-  }
-  .hero-desc {
-    font-size: 15px; color: var(--text-soft); max-width: 580px;
-    line-height: 1.8; animation: fadeUp 0.7s 0.3s ease both;
-  }
-  .hero-actions {
-    display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap;
-    animation: fadeUp 0.7s 0.4s ease both;
-  }
-  .btn-primary {
-    background: var(--teal); color: #060c14;
-    font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px;
-    padding: 13px 26px; border: none; cursor: pointer; letter-spacing: 0.06em;
-    text-decoration: none; display: inline-block;
-    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
-    transition: background 0.2s, transform 0.2s;
-  }
-  .btn-primary:hover { background: #00ccb4; transform: translateY(-2px); }
-  .btn-ghost {
-    background: transparent; color: var(--teal);
-    font-family: 'Syne', sans-serif; font-weight: 600; font-size: 13px;
-    padding: 12px 24px; border: 1px solid rgba(0,229,200,0.4); cursor: pointer;
-    letter-spacing: 0.06em; text-decoration: none; display: inline-block;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .btn-ghost:hover { border-color: var(--teal); background: var(--teal-dim); }
-
-  /* HERO PHOTO */
-  .hero-photo-wrap {
-    position: relative; z-index: 2; flex-shrink: 0;
-    animation: fadeUp 0.8s 0.2s ease both;
-  }
-  .hero-photo-frame {
-    width: 290px; height: 360px;
-    border: 2px solid rgba(0,229,200,0.4);
-    position: relative; overflow: hidden;
-    background: var(--surface);
-    clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
-    box-shadow: 0 12px 36px rgba(0,0,0,0.5);
-  }
-  .hero-photo-frame img {
-    width: 100%; height: 100%; object-fit: cover; object-position: center 25%; display: block;
-    filter: contrast(1.05);
-    transition: filter 0.4s, transform 0.4s; cursor: zoom-in;
-  }
-  .hero-photo-frame:hover img { filter: contrast(1.1); transform: scale(1.03); }
-  .hero-photo-wrap::before, .hero-photo-wrap::after {
-    content: ''; position: absolute;
-    width: 22px; height: 22px; border-color: var(--teal); border-style: solid;
-  }
-  .hero-photo-wrap::before { top: -8px; left: -8px; border-width: 2px 0 0 2px; }
-  .hero-photo-wrap::after { bottom: -8px; right: -8px; border-width: 0 2px 2px 0; }
-
-  .hero-stats {
-    display: flex; gap: 32px; margin-top: 44px;
-    animation: fadeUp 0.7s 0.5s ease both;
-    flex-wrap: wrap;
-  }
-  .stat { display: flex; flex-direction: column; gap: 4px; }
-  .stat-num { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: var(--white); line-height: 1; }
-  .stat-num span { color: var(--teal); }
-  .stat-label { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
-
-  /* SECTIONS */
-  section { position: relative; z-index: 1; padding: 100px 60px; }
-  .section-header { display: flex; align-items: center; gap: 20px; margin-bottom: 50px; }
-  .section-num { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--teal); letter-spacing: 0.1em; }
-  .section-line { flex: 1; height: 1px; background: linear-gradient(to right, var(--border), transparent); }
-  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(26px, 4vw, 38px); font-weight: 800; color: var(--white); letter-spacing: -0.02em; }
-
-  /* EXPERIENCE SECTION */
-  #experience { background: var(--surface); }
-  .exp-timeline { display: flex; flex-direction: column; gap: 30px; }
-  .exp-card {
-    background: var(--bg); border: 1px solid var(--border);
-    padding: 36px 40px; position: relative;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .exp-card:hover { border-color: rgba(0,229,200,0.45); transform: translateY(-3px); }
-  .exp-card::before {
-    content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
-    background: linear-gradient(to bottom, var(--teal), var(--amber));
-  }
-  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
-  .exp-role { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--white); }
-  .exp-company { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--teal); margin-top: 4px; display: flex; align-items: center; gap: 10px; }
-  .exp-badge-ocp { background: rgba(0,229,200,0.12); color: var(--teal); border: 1px solid rgba(0,229,200,0.3); padding: 2px 8px; font-size: 10px; border-radius: 2px; }
-  .exp-period { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--amber); letter-spacing: 0.05em; background: var(--amber-dim); padding: 5px 12px; border-radius: 2px; border: 1px solid rgba(245,158,11,0.25); }
-  .exp-desc { margin-bottom: 20px; }
-  .exp-list-items { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
-  .exp-list-items li { position: relative; padding-left: 24px; color: var(--text-soft); font-size: 14px; line-height: 1.7; }
-  .exp-list-items li::before {
-    content: '▹'; position: absolute; left: 0; top: 0;
-    color: var(--teal); font-family: monospace; font-size: 14px;
-  }
-  .exp-list-items strong { color: var(--white); font-weight: 600; }
-  .exp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; padding-top: 18px; border-top: 1px solid rgba(26,45,69,0.7); }
-
-  /* SKILLS */
-  #skills { background: var(--bg); }
-  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 18px; }
-  .skill-card {
-    background: var(--surface); padding: 28px; border: 1px solid var(--border);
-    position: relative; overflow: hidden; transition: border-color 0.3s, transform 0.3s;
-  }
-  .skill-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--teal); transition: height 0.4s ease; }
-  .skill-card:hover { border-color: rgba(0,229,200,0.4); transform: translateY(-3px); }
-  .skill-card:hover::before { height: 100%; }
-  .skill-icon { font-size: 24px; margin-bottom: 12px; }
-  .skill-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
-  .skill-desc { font-size: 12px; color: var(--text-soft); margin-bottom: 14px; }
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tag { font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 4px 10px; border: 1px solid var(--border); color: var(--text-soft); letter-spacing: 0.04em; border-radius: 2px; }
-  .tag-teal { border-color: rgba(0,229,200,0.3); color: var(--teal); background: rgba(0,229,200,0.05); }
-  .tag-amber { border-color: rgba(245,158,11,0.3); color: var(--amber); background: rgba(245,158,11,0.05); }
-
-  /* PROJECTS */
-  #projects { background: var(--surface); }
-  
-  /* Filter Bar */
-  .filter-bar { display: flex; gap: 10px; margin-bottom: 34px; flex-wrap: wrap; }
-  .filter-btn {
-    background: var(--bg); border: 1px solid var(--border);
-    color: var(--text-soft); font-family: 'IBM Plex Mono', monospace;
-    font-size: 11px; padding: 8px 16px; cursor: pointer; letter-spacing: 0.06em;
-    transition: all 0.2s; border-radius: 2px;
-  }
-  .filter-btn:hover { border-color: var(--teal); color: var(--teal); }
-  .filter-btn.active { background: var(--teal-dim); border-color: var(--teal); color: var(--teal); font-weight: 500; }
-
-  .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
-  .project-card {
-    background: var(--bg); border: 1px solid var(--border);
-    position: relative; overflow: hidden; display: flex; flex-direction: column;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .project-card:hover { border-color: rgba(0,229,200,0.45); transform: translateY(-4px); }
-  .project-card.featured { grid-column: span 2; border-color: rgba(0,229,200,0.3); }
-
-  /* Album */
-  .project-album { position: relative; width: 100%; background: #080f1a; border-bottom: 1px solid var(--border); overflow: hidden; }
-  .project-card.featured .project-album { height: 260px; }
-  .project-card:not(.featured) .project-album { height: 210px; }
-  .album-slides { display: flex; height: 100%; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); }
-  .album-slide { min-width: 100%; height: 100%; flex-shrink: 0; position: relative; }
-  .album-slide img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
-  .album-slide.placeholder {
-    background: linear-gradient(135deg, #091322, #0d1e34); display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 8px; cursor: pointer;
-    border: 1px dashed rgba(0,229,200,0.2);
-  }
-  .album-slide.placeholder .ph-icon { font-size: 32px; opacity: 0.7; }
-  .album-slide.placeholder .ph-label {
-    font-family: 'IBM Plex Mono', monospace; font-size: 11px;
-    color: var(--teal); letter-spacing: 0.08em; text-align: center; line-height: 1.6;
-  }
-  .album-slide.placeholder .ph-sub {
-    font-family: 'DM Sans', sans-serif; font-size: 11px; color: var(--muted);
-  }
-  .album-slide.placeholder input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-  .album-controls {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 8px 14px;
-    background: linear-gradient(to top, rgba(6,12,20,0.92), transparent);
-  }
-  .album-dots { display: flex; gap: 6px; }
-  .album-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: rgba(0,229,200,0.3); cursor: pointer; border: none;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .album-dot.active { background: var(--teal); transform: scale(1.4); }
-  .album-arrows { display: flex; gap: 6px; }
-  .album-btn {
-    background: rgba(0,229,200,0.1); border: 1px solid rgba(0,229,200,0.25);
-    color: var(--teal); width: 26px; height: 26px; cursor: pointer; font-size: 14px;
-    display: flex; align-items: center; justify-content: center; transition: background 0.2s;
-  }
-  .album-btn:hover { background: rgba(0,229,200,0.25); }
-  .album-counter { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--text-soft); letter-spacing: 0.06em; }
-
-  /* Project body */
-  .project-body { padding: 26px 30px 28px; flex: 1; display: flex; flex-direction: column; }
-  .project-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px; flex-wrap: wrap; }
-  .project-badge { display: inline-flex; align-items: center; gap: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--amber); border: 1px solid rgba(245,158,11,0.3); background: var(--amber-dim); padding: 4px 10px; letter-spacing: 0.06em; border-radius: 2px; }
-  .project-badge.badge-teal { color: var(--teal); border-color: rgba(0,229,200,0.35); background: var(--teal-dim); }
-  .project-num { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); }
-  .project-date { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--teal); margin-bottom: 6px; }
-  .project-title { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 12px; line-height: 1.35; }
-  .project-desc { font-size: 13px; color: var(--text-soft); line-height: 1.75; margin-bottom: 18px; flex: 1; }
-  .project-desc ul { margin-top: 6px; padding-left: 18px; }
-  .project-desc li { margin-bottom: 4px; }
-  .project-stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
-
-  /* EDUCATION */
-  #education { background: var(--bg); }
-  .edu-list { display: flex; flex-direction: column; position: relative; }
-  .edu-list::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: linear-gradient(to bottom, var(--teal), var(--border), transparent); }
-  .edu-item { display: flex; gap: 40px; padding: 34px 0 34px 60px; border-bottom: 1px solid var(--border); position: relative; }
-  .edu-item:last-child { border-bottom: none; }
-  .edu-dot { position: absolute; left: 14px; top: 38px; width: 13px; height: 13px; border: 2px solid var(--teal); background: var(--bg); border-radius: 50%; box-shadow: 0 0 10px rgba(0,229,200,0.5); }
-  .edu-year { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--teal); letter-spacing: 0.08em; white-space: nowrap; min-width: 140px; padding-top: 4px; font-weight: 500; }
-  .edu-degree { font-family: 'Syne', sans-serif; font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
-  .edu-school { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--amber); margin-bottom: 8px; }
-  .edu-desc { font-size: 13px; color: var(--text-soft); }
-
-  /* ACTIVITIES & LEADERSHIP */
-  #activities { background: var(--surface); }
-  .act-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
-  .act-card {
-    background: var(--bg); border: 1px solid var(--border);
-    padding: 30px; position: relative; overflow: hidden;
-    transition: border-color 0.3s, transform 0.3s;
-  }
-  .act-card:hover { border-color: rgba(0,229,200,0.4); transform: translateY(-3px); }
-  .act-role { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
-  .act-org { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--teal); margin-bottom: 8px; }
-  .act-period { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--amber); margin-bottom: 12px; letter-spacing: 0.05em; }
-  .act-desc { font-size: 13px; color: var(--text-soft); line-height: 1.7; }
-
-  /* LANGUAGES & INTERESTS */
-  .lang-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 40px; }
-  .lang-card { background: var(--bg); border: 1px solid var(--border); padding: 24px 16px; text-align: center; transition: border-color 0.3s, background 0.3s; }
-  .lang-card:hover { border-color: rgba(0,229,200,0.4); background: var(--teal-dim); }
-  .lang-flag { font-size: 28px; margin-bottom: 10px; }
-  .lang-name { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
-  .lang-level { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--teal); letter-spacing: 0.06em; }
-
-  .interests-wrapper {
-    background: var(--bg); border: 1px solid var(--border);
-    padding: 28px 32px; border-radius: 2px;
-  }
-  .interests-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 16px; }
-  .interests-pills { display: flex; flex-wrap: wrap; gap: 10px; }
-  .interest-pill {
-    background: var(--surface); border: 1px solid var(--border);
-    padding: 8px 16px; font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px; color: var(--text); display: flex; align-items: center; gap: 8px;
-    transition: all 0.2s;
-  }
-  .interest-pill:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-dim); }
-
-  /* CONTACT */
-  #contact { background: var(--surface); text-align: center; }
-  .contact-inner { max-width: 680px; margin: 0 auto; }
-  .contact-title { font-family: 'Syne', sans-serif; font-size: clamp(34px, 5vw, 56px); font-weight: 800; color: var(--white); line-height: 1.15; margin-bottom: 18px; }
-  .contact-title span { color: var(--teal); }
-  .contact-sub { font-size: 15px; color: var(--text-soft); margin-bottom: 36px; line-height: 1.8; }
-  .contact-links { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
-  .contact-link { display: flex; align-items: center; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-soft); text-decoration: none; border: 1px solid var(--border); padding: 12px 22px; transition: color 0.2s, border-color 0.2s, background 0.2s; letter-spacing: 0.04em; background: var(--bg); }
-  .contact-link:hover { color: var(--teal); border-color: rgba(0,229,200,0.5); background: var(--teal-dim); }
-
-  footer { padding: 28px 60px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1; background: var(--bg); }
-  .footer-text { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
-
-  /* LIGHTBOX */
-  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 999; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-  .lightbox.open { opacity: 1; pointer-events: all; }
-  .lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; border: 1px solid rgba(0,229,200,0.3); box-shadow: 0 0 30px rgba(0,229,200,0.2); }
-  .lb-close { position: absolute; top: 20px; right: 28px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--teal); cursor: pointer; background: none; border: none; letter-spacing: 0.06em; }
-  .lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,229,200,0.1); border: 1px solid rgba(0,229,200,0.3); color: var(--teal); font-size: 24px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-  .lb-prev { left: 20px; } .lb-next { right: 20px; }
-
-  /* ANIMATIONS */
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  @media (max-width: 900px) {
-    nav, section, footer { padding-left: 24px; padding-right: 24px; }
-    #hero { padding: 120px 24px 80px; flex-direction: column-reverse; align-items: flex-start; gap: 32px; }
-    .hero-photo-frame { width: 180px; height: 220px; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .project-card.featured { grid-column: span 1; }
-    .lang-grid { grid-template-columns: repeat(2, 1fr); }
-    nav { padding: 16px 24px; }
-    .nav-links { gap: 14px; }
-    .exp-card { padding: 24px; }
-  }
-  @media (max-width: 680px) {
-    .nav-links { display: none; }
-    .edu-item { flex-direction: column; gap: 6px; }
-    .edu-year { min-width: auto; }
-  }
+:root{--bg:#060c14;--surface:#0c1623;--border:#1a2d45;--teal:#00e5c8;--teal-dim:rgba(0,229,200,.10);--amber:#f59e0b;--amber-dim:rgba(245,158,11,.12);--muted:#4a6580;--text:#cde4f5;--soft:#85a5c2;--white:#eef6ff}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,229,200,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,200,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:18px 60px;background:rgba(6,12,20,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--teal);letter-spacing:.08em;font-weight:500}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--soft);text-decoration:none;letter-spacing:.06em;transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:130px 60px 80px;overflow:hidden;gap:60px}
+.hero-glow{position:absolute;top:15%;right:10%;width:450px;height:450px;background:radial-gradient(circle,rgba(0,229,200,.14),transparent 70%);pointer-events:none}
+.hero-content{position:relative;z-index:2;flex:1;max-width:650px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(0,229,200,.35);padding:7px 16px;border-radius:2px;background:var(--teal-dim);margin-bottom:24px;animation:fadeUp .6s both}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--teal);border-radius:50%;animation:pulse 2s infinite}
+.hero-name{font-family:'Syne',sans-serif;font-size:clamp(42px,5.8vw,78px);font-weight:800;line-height:1.05;color:var(--white);letter-spacing:-.02em;animation:fadeUp .7s .1s both}
+.hero-name span{color:var(--teal)}
+.hero-title{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--amber);margin:18px 0 20px;animation:fadeUp .7s .2s both}
+.hero-desc{color:var(--soft);max-width:580px;line-height:1.8;animation:fadeUp .7s .3s both}
+.hero-actions{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;animation:fadeUp .7s .4s both}
+.btn-primary{background:var(--teal);color:#060c14;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;padding:13px 26px;letter-spacing:.06em;text-decoration:none;display:inline-block;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,0 100%);transition:background .2s,transform .2s}
+.btn-primary:hover{background:#00ccb4;transform:translateY(-2px)}
+.btn-ghost{color:var(--teal);font-family:'Syne',sans-serif;font-weight:600;font-size:13px;padding:12px 24px;border:1px solid rgba(0,229,200,.4);letter-spacing:.06em;text-decoration:none;display:inline-block;transition:.2s}
+.btn-ghost:hover{border-color:var(--teal);background:var(--teal-dim)}
+.hero-photo-wrap{position:relative;z-index:2;flex-shrink:0;animation:fadeUp .8s .2s both}
+.hero-photo-frame{width:290px;height:360px;border:2px solid rgba(0,229,200,.4);overflow:hidden;background:var(--surface);clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px))}
+.hero-photo-frame img{width:100%;height:100%;object-fit:cover;object-position:center 25%;display:block;cursor:zoom-in;transition:transform .4s}
+.hero-photo-frame:hover img{transform:scale(1.03)}
+.hero-photo-wrap::before,.hero-photo-wrap::after{content:'';position:absolute;width:22px;height:22px;border:0 solid var(--teal)}
+.hero-photo-wrap::before{top:-8px;left:-8px;border-width:2px 0 0 2px}
+.hero-photo-wrap::after{bottom:-8px;right:-8px;border-width:0 2px 2px 0}
+.hero-stats{display:flex;gap:32px;margin-top:44px;flex-wrap:wrap;animation:fadeUp .7s .5s both}
+.stat{display:flex;flex-direction:column;gap:4px}
+.stat-num{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--white);line-height:1}
+.stat-num span{color:var(--teal)}
+.stat-label{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+section{position:relative;z-index:1;padding:100px 60px}
+.section-header{display:flex;align-items:center;gap:20px;margin-bottom:50px}
+.section-num{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal)}
+.section-line{flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent)}
+.section-title{font-family:'Syne',sans-serif;font-size:clamp(26px,4vw,38px);font-weight:800;color:var(--white);letter-spacing:-.02em}
+#experience,#projects,#activities,#contact{background:var(--surface)}
+.exp-card,.act-card,.lang-card,.interests-wrapper,.project-card{background:var(--bg);border:1px solid var(--border)}
+.exp-card{padding:36px 40px;position:relative;transition:.3s}
+.exp-card:hover,.project-card:hover,.act-card:hover{border-color:rgba(0,229,200,.45);transform:translateY(-3px)}
+.exp-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(var(--teal),var(--amber))}
+.exp-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+.exp-role{font-family:'Syne',sans-serif;font-size:20px;font-weight:800;color:var(--white)}
+.exp-company{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--teal);margin-top:4px;display:flex;align-items:center;gap:10px}
+.exp-badge{background:rgba(0,229,200,.12);border:1px solid rgba(0,229,200,.3);padding:2px 8px;font-size:10px;border-radius:2px}
+.exp-period,.project-badge{font-family:'IBM Plex Mono',monospace;color:var(--amber);background:var(--amber-dim);border:1px solid rgba(245,158,11,.3);border-radius:2px}
+.exp-period{font-size:12px;padding:5px 12px}
+.exp-list{list-style:none;display:flex;flex-direction:column;gap:12px}
+.exp-list li{position:relative;padding-left:24px;color:var(--soft);font-size:14px}
+.exp-list li::before{content:'▹';position:absolute;left:0;color:var(--teal)}
+.exp-list strong{color:var(--white);font-weight:600}
+.exp-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px;padding-top:18px;border-top:1px solid rgba(26,45,69,.7)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}
+.skill-card{background:var(--surface);padding:28px;border:1px solid var(--border);transition:.3s}
+.skill-card:hover{border-color:rgba(0,229,200,.4);transform:translateY(-3px)}
+.skill-icon{font-size:24px;margin-bottom:12px}
+.skill-name{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:6px}
+.skill-desc{font-size:12px;color:var(--soft);margin-bottom:14px}
+.skill-tags,.project-stack{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:4px 10px;border:1px solid var(--border);color:var(--soft);border-radius:2px}
+.tag-teal{border-color:rgba(0,229,200,.3);color:var(--teal);background:rgba(0,229,200,.05)}
+.tag-amber{border-color:rgba(245,158,11,.3);color:var(--amber);background:rgba(245,158,11,.05)}
+.filter-bar{display:flex;gap:10px;margin-bottom:34px;flex-wrap:wrap}
+.filter-btn{background:var(--bg);border:1px solid var(--border);color:var(--soft);font-family:'IBM Plex Mono',monospace;font-size:11px;padding:8px 16px;cursor:pointer;border-radius:2px;transition:.2s}
+.filter-btn:hover,.filter-btn.active{border-color:var(--teal);color:var(--teal)}
+.filter-btn.active{background:var(--teal-dim)}
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.project-card{position:relative;overflow:hidden;display:flex;flex-direction:column;transition:.3s}
+.project-card.featured{grid-column:span 2;border-color:rgba(0,229,200,.3)}
+.project-album{position:relative;width:100%;height:210px;background:#080f1a;border-bottom:1px solid var(--border);overflow:hidden}
+.featured .project-album{height:260px}
+.album-slides{display:flex;height:100%;transition:transform .45s cubic-bezier(.4,0,.2,1)}
+.album-slide{min-width:100%;height:100%;position:relative}
+.album-slide img{width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in}
+.album-slide.placeholder{background:linear-gradient(135deg,#091322,#0d1e34);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px dashed rgba(0,229,200,.2)}
+.ph-icon{font-size:32px;opacity:.7}
+.ph-label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);text-align:center;line-height:1.6}
+.ph-sub{font-size:11px;color:var(--muted)}
+.album-slide input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.album-controls{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:8px 14px;background:linear-gradient(to top,rgba(6,12,20,.92),transparent)}
+.album-dots,.album-arrows{display:flex;gap:6px}
+.album-dot{width:6px;height:6px;border-radius:50%;background:rgba(0,229,200,.3);cursor:pointer;border:none;transition:.2s}
+.album-dot.active{background:var(--teal);transform:scale(1.4)}
+.album-btn{background:rgba(0,229,200,.1);border:1px solid rgba(0,229,200,.25);color:var(--teal);width:26px;height:26px;cursor:pointer;font-size:14px}
+.album-counter{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--soft)}
+.project-body{padding:26px 30px 28px;flex:1;display:flex;flex-direction:column}
+.project-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:10px;flex-wrap:wrap}
+.project-badge{font-size:10px;padding:4px 10px}
+.project-badge.teal{color:var(--teal);border-color:rgba(0,229,200,.35);background:var(--teal-dim)}
+.project-num{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.project-date{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);margin-bottom:6px}
+.project-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:var(--white);margin-bottom:12px;line-height:1.35}
+.project-desc{font-size:13px;color:var(--soft);line-height:1.75;margin-bottom:18px;flex:1}
+.project-desc strong{color:var(--white)}
+.project-stack{margin-top:auto}
+.edu-list{display:flex;flex-direction:column;position:relative}
+.edu-list::before{content:'';position:absolute;left:20px;top:0;bottom:0;width:1px;background:linear-gradient(var(--teal),var(--border),transparent)}
+.edu-item{display:flex;gap:40px;padding:34px 0 34px 60px;border-bottom:1px solid var(--border);position:relative}
+.edu-item:last-child{border-bottom:none}
+.edu-dot{position:absolute;left:14px;top:38px;width:13px;height:13px;border:2px solid var(--teal);background:var(--bg);border-radius:50%;box-shadow:0 0 10px rgba(0,229,200,.5)}
+.edu-year{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);white-space:nowrap;min-width:140px;padding-top:4px;font-weight:500}
+.edu-degree{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:var(--white);margin-bottom:4px}
+.edu-school{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--amber);margin-bottom:8px}
+.edu-desc{font-size:13px;color:var(--soft)}
+.act-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin-bottom:40px}
+.act-card{padding:30px;transition:.3s}
+.act-role{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:4px}
+.act-org{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--teal);margin-bottom:8px}
+.act-period{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--amber);margin-bottom:12px}
+.act-desc{font-size:13px;color:var(--soft)}
+.lang-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:40px}
+.lang-card{padding:24px 16px;text-align:center;transition:.3s}
+.lang-card:hover{border-color:rgba(0,229,200,.4);background:var(--teal-dim)}
+.lang-flag{font-size:28px;margin-bottom:10px}
+.lang-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:var(--white)}
+.lang-level{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal)}
+.interests-wrapper{padding:28px 32px;border-radius:2px}
+.interests-title{font-family:'Syne',sans-serif;font-size:16px;font-weight:700;color:var(--white);margin-bottom:16px}
+.interests-pills{display:flex;flex-wrap:wrap;gap:10px}
+.interest-pill{background:var(--surface);border:1px solid var(--border);padding:8px 16px;font-family:'IBM Plex Mono',monospace;font-size:12px;transition:.2s}
+.interest-pill:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-dim)}
+#contact{text-align:center}
+.contact-inner{max-width:680px;margin:0 auto}
+.contact-title{font-family:'Syne',sans-serif;font-size:clamp(34px,5vw,56px);font-weight:800;color:var(--white);line-height:1.15;margin-bottom:18px}
+.contact-title span{color:var(--teal)}
+.contact-sub{color:var(--soft);margin-bottom:36px;line-height:1.8}
+.contact-links{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.contact-link{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--soft);text-decoration:none;border:1px solid var(--border);padding:12px 22px;background:var(--bg);transition:.2s}
+a.contact-link:hover{color:var(--teal);border-color:rgba(0,229,200,.5);background:var(--teal-dim)}
+footer{padding:28px 60px;border-top:1px solid var(--border);display:flex;justify-content:space-between;position:relative;z-index:1;background:var(--bg);flex-wrap:wrap;gap:8px}
+.footer-text{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--muted)}
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s}
+.lightbox.open{opacity:1;pointer-events:all}
+.lightbox img{max-width:90vw;max-height:88vh;object-fit:contain;border:1px solid rgba(0,229,200,.3)}
+.lb-close{position:absolute;top:20px;right:28px;font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--teal);cursor:pointer;background:none;border:none}
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,229,200,.1);border:1px solid rgba(0,229,200,.3);color:var(--teal);font-size:24px;width:48px;height:48px;cursor:pointer}
+.lb-prev{left:20px}.lb-next{right:20px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{opacity:.3}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:none}
+@media(max-width:900px){nav,section,footer{padding-left:24px;padding-right:24px}#hero{padding:120px 24px 80px;flex-direction:column-reverse;align-items:flex-start;gap:32px}.hero-photo-frame{width:180px;height:220px}.projects-grid{grid-template-columns:1fr}.project-card.featured{grid-column:span 1}.lang-grid{grid-template-columns:repeat(2,1fr)}.exp-card{padding:24px}}
+@media(max-width:680px){.nav-links{display:none}.edu-item{flex-direction:column;gap:6px}.edu-year{min-width:auto}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -390,317 +163,240 @@
 <nav>
   <div class="nav-logo">// ibtissame.abdoussi</div>
   <ul class="nav-links">
-    <li><a href="#experience">Expérience</a></li>
-    <li><a href="#skills">Compétences</a></li>
-    <li><a href="#projects">Projets</a></li>
-    <li><a href="#education">Formation</a></li>
-    <li><a href="#activities">Engagement</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#activities">Activities</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-glow"></div>
-
-  <!-- PROFILE PHOTO -->
   <div class="hero-photo-wrap">
-    <div class="hero-photo-frame" id="heroPhotoFrame">
-      <img src="me.jpg" alt="Ibtissame Abdoussi" onclick="openLightboxSingle('me.jpg')">
-    </div>
+    <div class="hero-photo-frame"><img src="me.jpg" alt="Ibtissame Abdoussi" onclick="openLightboxSingle('me.jpg')"></div>
   </div>
-
   <div class="hero-content">
-    <div class="hero-tag">À la recherche d'un stage de fin d'études (PFE · 5 mois)</div>
+    <div class="hero-tag">Seeking a 5-month end-of-studies internship (PFE)</div>
     <h1 class="hero-name">Ibtissame<br><span>Abdoussi</span></h1>
-    <p class="hero-title">// Élève Ingénieure en 5e année · Systèmes Embarqués, IoT & Robotique</p>
-    <p class="hero-desc">
-      Étudiante ingénieure en 5e année à l'ENSA d'Oujda (GSEIR). Spécialisée en systèmes embarqués, IoT et robotique, avec une expérience éprouvée en maintenance conditionnelle & IoT industriel chez <strong>OCP Group</strong>, en robotique autonome sous <strong>ROS/ROS2</strong> et en conception mécatronique.
-    </p>
+    <p class="hero-title">// 5th-year Engineering Student · Embedded Systems, IoT & Robotics</p>
+    <p class="hero-desc">5th-year engineering student at ENSA Oujda (GSEIR), specialized in embedded systems, IoT and robotics, with hands-on experience in condition-based maintenance and industrial IoT at <strong>OCP Group</strong>, in robotics under <strong>ROS/ROS2</strong>, and in mechatronic design.</p>
     <div class="hero-actions">
-      <a href="#projects" class="btn-primary">Découvrir mes projets</a>
-      <a href="mailto:ibtissam.abdoussi.23@ump.ac.ma" class="btn-ghost">Me contacter</a>
-      <a href="#experience" class="btn-ghost">Expérience OCP</a>
+      <a href="#projects" class="btn-primary">See my projects</a>
+      <a href="mailto:ibtissam.abdoussi.23@ump.ac.ma" class="btn-ghost">Contact me</a>
+      <a href="#experience" class="btn-ghost">OCP experience</a>
     </div>
     <div class="hero-stats">
-      <div class="stat"><div class="stat-num">5<span>e</span></div><div class="stat-label">Année Ingénieure (ENSA)</div></div>
-      <div class="stat"><div class="stat-num">OCP</div><div class="stat-label">Stage IoT & Maintenance</div></div>
-      <div class="stat"><div class="stat-num">1<span>ère</span></div><div class="stat-label">Place Miathon'03</div></div>
-      <div class="stat"><div class="stat-num">4<span>×</span></div><div class="stat-label">Langues courantes</div></div>
+      <div class="stat"><div class="stat-num">5<span>th</span></div><div class="stat-label">Engineering year (ENSA)</div></div>
+      <div class="stat"><div class="stat-num">OCP</div><div class="stat-label">IoT & maintenance internship</div></div>
+      <div class="stat"><div class="stat-num">1<span>st</span></div><div class="stat-label">Place Miathon'03</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Languages</div></div>
     </div>
   </div>
 </section>
 
-<!-- EXPÉRIENCE PROFESSIONNELLE -->
 <section id="experience">
-  <div class="section-header reveal">
-    <span class="section-num">01 /</span>
-    <h2 class="section-title">Expérience Professionnelle</h2>
-    <div class="section-line"></div>
-  </div>
-  <div class="exp-timeline">
-    <div class="exp-card reveal">
-      <div class="exp-header">
-        <div>
-          <div class="exp-role">Stagiaire – Maintenance Conditionnelle & IoT Industriel</div>
-          <div class="exp-company">
-            <span>OCP Group</span>
-            <span class="exp-badge-ocp">Youssoufia, Maroc</span>
-          </div>
-        </div>
-        <div class="exp-period">07/2026 – 09/2026</div>
+  <div class="section-header reveal"><span class="section-num">01 /</span><h2 class="section-title">Professional Experience</h2><div class="section-line"></div></div>
+  <div class="exp-card reveal">
+    <div class="exp-header">
+      <div>
+        <div class="exp-role">Intern – Condition-Based Maintenance & Industrial IoT</div>
+        <div class="exp-company"><span>OCP Group</span><span class="exp-badge">Youssoufia, Morocco</span></div>
       </div>
-      <div class="exp-desc">
-        <ul class="exp-list-items">
-          <li><strong>Surveillance vibratoire et thermique :</strong> Étude et simulation approfondie d’un système de surveillance en temps réel des têtes motrices de convoyeurs industriels. Traitement du signal par analyse spectrale et statistique (<strong>FFT, RMS, Kurtosis</strong>) pour la détection précoce et le diagnostic d’anomalies mécaniques.</li>
-          <li><strong>Architecture IoT de supervision :</strong> Conception et déploiement de la chaîne complète de télémétrie industrielle : <em>Capteurs → Protocole MQTT → InfluxDB (Série temporelle) → Grafana</em> avec dashboard interactif temps réel pour les équipes de maintenance.</li>
-          <li><strong>Digitalisation & Méthodologie d'amélioration :</strong> Développement d’une application web de centralisation et de génération automatique des rapports journaliers de production. Réalisation d'une étude <strong>ADMEC</strong> et application de la méthode de résolution de problèmes <strong>DMAIC</strong>.</li>
-        </ul>
-      </div>
-      <div class="exp-tags">
-        <span class="tag tag-teal">IoT Industriel</span>
-        <span class="tag tag-teal">MQTT</span>
-        <span class="tag tag-teal">InfluxDB</span>
-        <span class="tag tag-teal">Grafana</span>
-        <span class="tag tag-amber">Traitement du Signal (FFT, RMS, Kurtosis)</span>
-        <span class="tag">Maintenance Prédictive</span>
-        <span class="tag">ADMEC & DMAIC</span>
-        <span class="tag">Python</span>
-        <span class="tag">Application Web</span>
-      </div>
+      <div class="exp-period">07/2026 – 09/2026</div>
+    </div>
+    <ul class="exp-list">
+      <li><strong>Vibration and thermal monitoring:</strong> studied and simulated a real-time monitoring system for conveyor drive heads, using signal processing (<strong>FFT, RMS, Kurtosis</strong>) for early detection and diagnosis of mechanical anomalies.</li>
+      <li><strong>IoT supervision architecture:</strong> designed the full telemetry chain <em>sensors → MQTT → InfluxDB (time series) → Grafana</em>, with an interactive real-time dashboard for maintenance teams.</li>
+      <li><strong>Digitalization & improvement methods:</strong> developed a web application that centralizes data and generates daily production reports; carried out an <strong>ADMEC</strong> study and applied the <strong>DMAIC</strong> problem-solving method.</li>
+    </ul>
+    <div class="exp-tags">
+      <span class="tag tag-teal">Industrial IoT</span><span class="tag tag-teal">MQTT</span><span class="tag tag-teal">InfluxDB</span><span class="tag tag-teal">Grafana</span>
+      <span class="tag tag-amber">Signal Processing (FFT, RMS, Kurtosis)</span><span class="tag">Predictive Maintenance</span><span class="tag">ADMEC & DMAIC</span><span class="tag">Web Application</span>
     </div>
   </div>
 </section>
 
-<!-- COMPÉTENCES TECHNIQUES -->
 <section id="skills">
-  <div class="section-header reveal">
-    <span class="section-num">02 /</span>
-    <h2 class="section-title">Compétences Techniques</h2>
-    <div class="section-line"></div>
+  <div class="section-header reveal"><span class="section-num">02 /</span><h2 class="section-title">Technical Skills</h2><div class="section-line"></div></div>
+  <div class="skills-grid" id="skillsGrid"></div>
+</section>
+
+<section id="projects">
+  <div class="section-header reveal"><span class="section-num">03 /</span><h2 class="section-title">Projects</h2><div class="section-line"></div></div>
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" onclick="filterProjects('all',this)">All projects</button>
+    <button class="filter-btn" onclick="filterProjects('robotics',this)">Robotics & ROS</button>
+    <button class="filter-btn" onclick="filterProjects('iot',this)">IoT & Embedded</button>
+    <button class="filter-btn" onclick="filterProjects('control',this)">Control & AI</button>
   </div>
-  <div class="skills-grid">
-    <!-- 1 -->
-    <div class="skill-card reveal">
-      <div class="skill-icon">🔌</div>
-      <div class="skill-name">Systèmes Embarqués & Électronique</div>
-      <p class="skill-desc">Microcontrôleurs, architectures matérielles et interfaçage</p>
-      <div class="skill-tags">
-        <span class="tag tag-teal">C / C++ (embarqué)</span>
-        <span class="tag tag-teal">PIC16F / PIC18F</span>
-        <span class="tag tag-teal">ESP32 / ESP8266</span>
-        <span class="tag tag-teal">Raspberry Pi 4</span>
-        <span class="tag">Capteurs & Actionneurs</span>
-      </div>
-    </div>
-    <!-- 2 -->
-    <div class="skill-card reveal">
-      <div class="skill-icon">🛠️</div>
-      <div class="skill-name">Conception Électronique & CAO</div>
-      <p class="skill-desc">Du schéma électronique au routage PCB et modélisation 3D</p>
-      <div class="skill-tags">
-        <span class="tag tag-amber">Proteus</span>
-        <span class="tag tag-amber">EasyEDA</span>
-        <span class="tag tag-amber">Fusion 360 (CAO 3D)</span>
-        <span class="tag">KiCad (notions de base)</span>
-        <span class="tag">Tinkercad</span>
-      </div>
-    </div>
-    <!-- 3 -->
-    <div class="skill-card reveal">
-      <div class="skill-icon">🤖</div>
-      <div class="skill-name">Robotique, Vision & Automatique</div>
-      <p class="skill-desc">Robotique autonome, cinématique, vision artificielle et asservissement</p>
-      <div class="skill-tags">
-        <span class="tag tag-teal">ROS1 / ROS2</span>
-        <span class="tag tag-teal">OpenCV & cv_bridge</span>
-        <span class="tag tag-amber">MATLAB / Simulink</span>
-        <span class="tag">Cinématique (MGI/MGD)</span>
-        <span class="tag">Régulation PID</span>
-      </div>
-    </div>
-    <!-- 4 -->
-    <div class="skill-card reveal">
-      <div class="skill-icon">💻</div>
-      <div class="skill-name">Programmation & Systèmes</div>
-      <p class="skill-desc">Développement orienté objet, environnement système et protocoles</p>
-      <div class="skill-tags">
-        <span class="tag tag-teal">Python</span>
-        <span class="tag tag-teal">Java</span>
-        <span class="tag">Programmation Orientée Objet</span>
-        <span class="tag">Linux (fichiers, mémoire, processus)</span>
-        <span class="tag tag-amber">MQTT</span>
-        <span class="tag">API REST</span>
-      </div>
-    </div>
-    <!-- 5 -->
-    <div class="skill-card reveal">
-      <div class="skill-icon">⚡</div>
-      <div class="skill-name">Conception Numérique & Bas Niveau</div>
-      <p class="skill-desc">Description matérielle et programmation au plus près du silicium</p>
-      <div class="skill-tags">
-        <span class="tag tag-amber">VHDL</span>
-        <span class="tag tag-amber">Verilog</span>
-        <span class="tag tag-teal">Assembleur</span>
-        <span class="tag">Logique Programmable</span>
-      </div>
-    </div>
-    <!-- 6 -->
-    <div class="skill-card reveal">
-      <div class="skill-icon">🏭</div>
-      <div class="skill-name">Automatisme Industriel</div>
-      <p class="skill-desc">Programmation des automates et contrôle-commande de procédés</p>
-      <div class="skill-tags">
-        <span class="tag tag-teal">Automates Programmables (API)</span>
-        <span class="tag tag-amber">TIA Portal</span>
-        <span class="tag">Langage Ladder (LD)</span>
-        <span class="tag">GRAFCET</span>
-      </div>
-    </div>
-    <!-- 7 -->
-    <div class="skill-card reveal">
-      <div class="skill-icon">📊</div>
-      <div class="skill-name">Traitement & Analyse des Données</div>
-      <p class="skill-desc">Traitement de signal avancé, vision par ordinateur et intelligence artificielle</p>
-      <div class="skill-tags">
-        <span class="tag tag-teal">Traitement du Signal (FFT, RMS, Kurtosis)</span>
-        <span class="tag tag-teal">Traitement d'Image</span>
-        <span class="tag tag-amber">Machine Learning (MLP)</span>
-      </div>
+  <div class="projects-grid" id="projectsGrid"></div>
+</section>
+
+<section id="education">
+  <div class="section-header reveal"><span class="section-num">04 /</span><h2 class="section-title">Education</h2><div class="section-line"></div></div>
+  <div class="edu-list">
+    <div class="edu-item reveal"><div class="edu-dot"></div><div class="edu-year">2024 – present</div><div>
+      <div class="edu-degree">Engineering Degree in Electronic, Computer and Network Systems Engineering</div>
+      <div class="edu-school">ENSA · Oujda, Morocco</div><div class="edu-desc">National School of Applied Sciences</div></div></div>
+    <div class="edu-item reveal"><div class="edu-dot"></div><div class="edu-year">2022 – 2024</div><div>
+      <div class="edu-degree">Integrated Preparatory Classes (STPI)</div>
+      <div class="edu-school">ENSA · Oujda, Morocco</div></div></div>
+    <div class="edu-item reveal"><div class="edu-dot"></div><div class="edu-year">2022</div><div>
+      <div class="edu-degree">Scientific Baccalaureate – Physical Sciences, French Option</div>
+      <div class="edu-school">Lycée Al Badil Attarbaoui · Oujda</div><div class="edu-desc">Graduated with highest honors (Mention Très Bien)</div></div></div>
+  </div>
+</section>
+
+<section id="activities">
+  <div class="section-header reveal"><span class="section-num">05 /</span><h2 class="section-title">Activities, Languages & Interests</h2><div class="section-line"></div></div>
+  <div class="act-grid">
+    <div class="act-card reveal"><div class="act-role">Head of the Media Team</div><div class="act-org">GSEIR Club</div><div class="act-period">2025 – 2026</div><p class="act-desc">Organized robotics/IoT workshops, led a team and took part in competitions.</p></div>
+    <div class="act-card reveal"><div class="act-role">Educational Facilitator</div><div class="act-org">Maison des Sciences Orientale (MSO)</div><p class="act-desc" style="margin-top:12px">Interactive workshops introducing children to science and technology.</p></div>
+    <div class="act-card reveal"><div class="act-role">Active Member</div><div class="act-org">Sports Club</div><div class="act-period">2022 – present</div><p class="act-desc">Organized sports events and hosted the 2024 inter-university tournament ceremony.</p></div>
+  </div>
+  <div class="lang-grid reveal">
+    <div class="lang-card"><div class="lang-flag">🇲🇦</div><div class="lang-name">Arabic</div><div class="lang-level">Native</div></div>
+    <div class="lang-card"><div class="lang-flag">🇫🇷</div><div class="lang-name">French</div><div class="lang-level">Fluent</div></div>
+    <div class="lang-card"><div class="lang-flag">🇬🇧</div><div class="lang-name">English</div><div class="lang-level">Fluent</div></div>
+    <div class="lang-card"><div class="lang-flag">🇪🇸</div><div class="lang-name">Spanish</div><div class="lang-level">Fluent</div></div>
+  </div>
+  <div class="interests-wrapper reveal">
+    <div class="interests-title">Interests</div>
+    <div class="interests-pills">
+      <span class="interest-pill">🤖 Robotics</span><span class="interest-pill">🚴 Cycling</span><span class="interest-pill">🥋 Karate</span><span class="interest-pill">🏸 Badminton</span><span class="interest-pill">🏐 Volleyball</span><span class="interest-pill">🧘 Power yoga</span><span class="interest-pill">🗣️ Language learning</span>
     </div>
   </div>
 </section>
 
-<!-- PROJETS -->
-<section id="projects">
-  <div class="section-header reveal">
-    <span class="section-num">03 /</span>
-    <h2 class="section-title">Projets Réalisés</h2>
-    <div class="section-line"></div>
+<section id="contact">
+  <div class="contact-inner reveal">
+    <h2 class="contact-title">Let’s work <span>together</span></h2>
+    <p class="contact-sub">I’m looking for a 5-month end-of-studies internship in embedded systems, IoT or robotics.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:ibtissam.abdoussi.23@ump.ac.ma">✉ ibtissam.abdoussi.23@ump.ac.ma</a>
+      <a class="contact-link" href="tel:+212664520040">📞 0664520040</a>
+      <span class="contact-link">📍 Oujda, Morocco</span>
+    </div>
   </div>
+</section>
 
-  <!-- Filter buttons -->
-  <div class="filter-bar reveal">
-    <button class="filter-btn active" onclick="filterProjects('all')">Tous les projets</button>
-    <button class="filter-btn" onclick="filterProjects('robotique')">Robotique & ROS</button>
-    <button class="filter-btn" onclick="filterProjects('iot')">IoT & Systèmes Embarqués</button>
-    <button class="filter-btn" onclick="filterProjects('automatique')">Automatique & IA</button>
-  </div>
+<footer>
+  <div class="footer-text">© 2026 Ibtissame Abdoussi</div>
+  <div class="footer-text">Embedded Systems · IoT · Robotics</div>
+</footer>
 
-  <div class="projects-grid">
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" onclick="closeLightbox()">[ CLOSE ✕ ]</button>
+  <button class="lb-prev" onclick="lbStep(-1)">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button class="lb-next" onclick="lbStep(1)">›</button>
+</div>
 
-    <!-- PROJET 1 : Robot Watch -->
-    <div class="project-card featured reveal" data-category="robotique iot" data-album="album-watch">
-      <div class="project-album">
-        <div class="album-slides" id="album-watch-slides">
-          <div class="album-slide placeholder">
-            <div class="ph-icon">🤖</div>
-            <div class="ph-label">Robot « Watch » · Supervision Visuelle 4WD</div>
-            <div class="ph-sub">Inspiré de R-Stepps · Raspberry Pi & Fusion 360</div>
-            <input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-watch',0)">
-          </div>
-          <div class="album-slide placeholder">
-            <div class="ph-icon">📐</div>
-            <div class="ph-label">Modélisation CAO 3D & Châssis</div>
-            <div class="ph-sub">Cliquez pour ajouter une capture Fusion 360</div>
-            <input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-watch',1)">
-          </div>
-        </div>
-        <div class="album-controls">
-          <div class="album-dots" id="album-watch-dots">
-            <button class="album-dot active" onclick="goSlide('album-watch',0)"></button>
-            <button class="album-dot" onclick="goSlide('album-watch',1)"></button>
-          </div>
-          <span class="album-counter" id="album-watch-counter">1 / 2</span>
-          <div class="album-arrows">
-            <button class="album-btn" onclick="prevSlide('album-watch')">‹</button>
-            <button class="album-btn" onclick="nextSlide('album-watch')">›</button>
-          </div>
-        </div>
+<script>
+const tg = s => { const [c, t] = s.split('|'); return `<span class="tag ${{t:'tag-teal',a:'tag-amber',n:''}[c]}">${t}</span>`; };
+
+const SKILLS = [
+  ['🔌','Embedded Systems & Electronics','Microcontrollers, hardware architectures and interfacing',['t|C / C++ (embedded)','t|PIC16F / PIC18F','t|ESP32 / ESP8266','t|Raspberry Pi 4','n|Sensors & Actuators']],
+  ['🛠️','Electronic Design & CAD','From schematic to PCB routing and 3D modeling',['a|Proteus','a|EasyEDA','a|Fusion 360 (3D CAD)','n|KiCad (basics)','n|Tinkercad']],
+  ['🤖','Robotics, Vision & Control','Autonomous robotics, kinematics, computer vision and feedback control',['t|ROS1 / ROS2','t|OpenCV & cv_bridge','a|MATLAB / Simulink','n|Kinematics (IGM/DGM)','n|PID Control']],
+  ['💻','Programming & Systems','Object-oriented development, operating systems and protocols',['t|Python','t|Java','n|Object-Oriented Programming','n|Linux (files, users, memory, processes)','a|MQTT','n|REST API']],
+  ['⚡','Digital Design & Low Level','Hardware description and programming close to the silicon',['a|VHDL','a|Verilog','t|Assembly']],
+  ['🏭','Industrial Automation','PLC programming and process control',['t|Programmable Logic Controllers (PLC)','a|TIA Portal','n|Ladder Language (LD)','n|GRAFCET']],
+  ['📊','Data Processing & Analysis','Signal processing, image processing and machine learning',['t|Signal Processing (FFT, RMS, Kurtosis)','t|Image Processing','a|Machine Learning (MLP)']]
+];
+
+const PROJECTS = [
+  {id:'watch',cat:'robotics iot',feat:1,badge:'Academic project · Robotics & CAD',num:'P.01',date:'10/2026 – present',
+   title:'“Watch” visual supervision robot inspired by R-Stepps',
+   desc:`Design of a 4-wheel-drive mobile robot that streams live video to a remote station to supervise planting operations.<br>• Requirements specification, system architecture and component selection.<br>• Full 3D modeling of the chassis and sensor mounts in <strong>Fusion 360</strong>.<br>• Validation plan and an automatic emergency stop if communication is lost.`,
+   tags:['t|Fusion 360','t|Raspberry Pi','t|Camera streaming','n|Wi-Fi','n|Mobile robot 4WD','n|Fail-safe'],
+   slides:[['🤖','“Watch” robot · 4WD visual supervision','Click to add a photo'],['📐','3D CAD model & chassis','Click to add a Fusion 360 capture']]},
+  {id:'line',cat:'robotics control',badge:'Academic project · Vision & ROS',num:'P.02',date:'09/2026 – present',
+   title:'Vision-based line-following robot under ROS',
+   desc:`Mobile robot developed under <strong>ROS</strong> that follows a line using an RGB camera.<br>• Image processing with <strong>OpenCV</strong> and <strong>cv_bridge</strong>, with proportional (P) control.<br>• Evaluation of maximum speed and of the influence of camera tilt angle.`,
+   tags:['t|ROS','t|Python','t|OpenCV','a|cv_bridge','n|Computer vision','n|Mobile robotics','n|AI'],
+   slides:[['👁️','Line-following robot · ROS vision','Click to add a photo'],['📷','Experimental results & trajectory','Click to add a photo']]},
+  {id:'miathon',cat:'iot control',badge:'🏆 1st place · Miathon\'03',num:'P.03',date:'04/2026 – 06/2026',
+   title:'Chronic disease diagnosis system using breath analysis',
+   desc:`Project awarded first place at Miathon'03.<br>• Design of an embedded system for early diagnosis of chronic diseases.<br>• Analysis of gas biomarkers and data processing.`,
+   tags:['t|Embedded system','t|Multi-gas sensors','a|AI','n|Signal processing','n|Medical IoT'],
+   slides:[['🏆','1st place · Miathon\'03 hackathon','Click to add a photo'],['🫁','Prototype & multi-gas sensors','Click to add a photo']]},
+  {id:'dofbot',cat:'robotics control',badge:'End-of-year project (PFA)',num:'P.04',date:'03/2026 – 07/2026',
+   title:'Modeling and control of a 6-axis robotic arm (DOFBOT Pi)',
+   desc:`• Development of a <strong>ROS1</strong> architecture and comparison of DGM/IGM models.<br>• Evaluation of accuracy and computation time.`,
+   tags:['t|ROS1','t|Raspberry Pi 4','t|Python','a|Machine Learning (MLP)','n|IGM / DGM','n|Robotics'],
+   slides:[['🦾','6-axis robotic arm · DOFBOT Pi','Click to add a photo'],['📈','DGM / IGM comparison & MLP','Click to add a photo']]},
+  {id:'matlab',cat:'control',badge:'Academic project · Control',num:'P.05',date:'04/2025 – 06/2025',
+   title:'Optimization and control of dynamic systems with MATLAB/Simulink',
+   desc:`• Modeling, frequency analysis and design of PI, PD and PID controllers.<br>• Validation of stability and robustness.`,
+   tags:['a|MATLAB / Simulink','t|Control engineering','t|PID control'],
+   slides:[['🎛️','Dynamic systems · MATLAB/Simulink','Click to add a capture'],['📉','Frequency analysis & stability','Click to add a capture']]}
+];
+
+document.getElementById('skillsGrid').innerHTML = SKILLS.map(s => `
+  <div class="skill-card reveal"><div class="skill-icon">${s[0]}</div><div class="skill-name">${s[1]}</div><p class="skill-desc">${s[2]}</p><div class="skill-tags">${s[3].map(tg).join('')}</div></div>`).join('');
+
+document.getElementById('projectsGrid').innerHTML = PROJECTS.map(p => `
+  <div class="project-card ${p.feat ? 'featured ' : ''}reveal" data-category="${p.cat}">
+    <div class="project-album">
+      <div class="album-slides" id="${p.id}-slides">${p.slides.map((s, i) => `
+        <div class="album-slide placeholder"><div class="ph-icon">${s[0]}</div><div class="ph-label">${s[1]}</div><div class="ph-sub">${s[2]}</div>
+        <input type="file" accept="image/*" onchange="addSlidePhoto(this,'${p.id}',${i})"></div>`).join('')}
       </div>
-      <div class="project-body">
-        <div class="project-header-row">
-          <div class="project-badge badge-teal">Projet Académique · Robotique & CAO</div>
-          <div class="project-num">P.01</div>
-        </div>
-        <div class="project-date">10/2026 – aujourd'hui</div>
-        <div class="project-title">Robot « Watch » de supervision visuelle inspiré de R-Stepps</div>
-        <p class="project-desc">
-          Conception intégrale d’un robot mobile à 4 roues motrices retransmettant la vidéo en direct vers un poste de contrôle distant pour superviser des opérations de plantation agricole et forestière.
-          <br>• Élaboration du cahier des charges fonctionnel, dimensionnement et choix des composants électroniques/mécaniques.
-          <br>• Modélisation 3D complète du châssis et des supports de capteurs sous <strong>Fusion 360</strong>.
-          <br>• Définition d’un plan de validation expérimental et implémentation d’un arrêt de sécurité d'urgence automatique en cas de rupture de communication Wi-Fi.
-        </p>
-        <div class="project-stack">
-          <span class="tag tag-teal">Fusion 360 (CAO 3D)</span>
-          <span class="tag tag-teal">Raspberry Pi</span>
-          <span class="tag tag-teal">Caméra Streaming</span>
-          <span class="tag">Wi-Fi</span>
-          <span class="tag">Robot Mobile 4WD</span>
-          <span class="tag">Sécurité Fail-Safe</span>
-        </div>
+      <div class="album-controls">
+        <div class="album-dots" id="${p.id}-dots">${p.slides.map((_, i) => `<button class="album-dot${i ? '' : ' active'}" aria-label="Slide ${i + 1}" onclick="goSlide('${p.id}',${i})"></button>`).join('')}</div>
+        <span class="album-counter" id="${p.id}-counter">1 / ${p.slides.length}</span>
+        <div class="album-arrows"><button class="album-btn" aria-label="Previous" onclick="prevSlide('${p.id}')">‹</button><button class="album-btn" aria-label="Next" onclick="nextSlide('${p.id}')">›</button></div>
       </div>
     </div>
-
-    <!-- PROJET 2 : Robot suiveur de ligne par vision -->
-    <div class="project-card reveal" data-category="robotique automatique" data-album="album-line">
-      <div class="project-album">
-        <div class="album-slides" id="album-line-slides">
-          <div class="album-slide placeholder">
-            <div class="ph-icon">👁️</div>
-            <div class="ph-label">Robot Suiveur de Ligne · Vision ROS</div>
-            <div class="ph-sub">Traitement OpenCV & cv_bridge</div>
-            <input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-line',0)">
-          </div>
-          <div class="album-slide placeholder">
-            <div class="ph-icon">📷</div>
-            <div class="ph-label">Résultats expérimentaux & Trajectoire</div>
-            <div class="ph-sub">Cliquez pour téléverser une photo</div>
-            <input type="file" accept="image/*" onchange="addSlidePhoto(this,'album-line',1)">
-          </div>
-        </div>
-        <div class="album-controls">
-          <div class="album-dots" id="album-line-dots">
-            <button class="album-dot active" onclick="goSlide('album-line',0)"></button>
-            <button class="album-dot" onclick="goSlide('album-line',1)"></button>
-          </div>
-          <span class="album-counter" id="album-line-counter">1 / 2</span>
-          <div class="album-arrows">
-            <button class="album-btn" onclick="prevSlide('album-line')">‹</button>
-            <button class="album-btn" onclick="nextSlide('album-line')">›</button>
-          </div>
-        </div>
-      </div>
-      <div class="project-body">
-        <div class="project-header-row">
-          <div class="project-badge badge-teal">Projet Académique · Vision & ROS</div>
-          <div class="project-num">P.02</div>
-        </div>
-        <div class="project-date">09/2026 – aujourd'hui</div>
-        <div class="project-title">Robot suiveur de ligne par vision artificielle sous ROS</div>
-        <p class="project-desc">
-          Développement d’un robot mobile sous l'environnement <strong>ROS</strong> pour l'asservissement et le suivi de ligne robuste via caméra RGB.
-          <br>• Traitement d'image temps réel avec <strong>OpenCV</strong> et interfaçage <strong>cv_bridge</strong> avec commande proportionnelle (P).
-          <br>• Évaluation expérimentale de la vitesse maximale et de l’influence de l’inclinaison angulaire de la caméra sur le comportement dynamique.
-        </p>
-        <div class="project-stack">
-          <span class="tag tag-teal">ROS</span>
-          <span class="tag tag-teal">Python</span>
-          <span class="tag tag-teal">OpenCV</span>
-          <span class="tag tag-amber">cv_bridge</span>
-          <span class="tag">Vision par Ordinateur</span>
-          <span class="tag">Robotique Mobile</span>
-          <span class="tag">Commande P</span>
-        </div>
-      </div>
+    <div class="project-body">
+      <div class="project-header-row"><div class="project-badge ${p.badge.startsWith('🏆') ? '' : 'teal'}">${p.badge}</div><div class="project-num">${p.num}</div></div>
+      <div class="project-date">${p.date}</div>
+      <div class="project-title">${p.title}</div>
+      <p class="project-desc">${p.desc}</p>
+      <div class="project-stack">${p.tags.map(tg).join('')}</div>
     </div>
+  </div>`).join('');
 
-    <!-- PROJET 3 : Miathon'03 Diagnostic de maladies -->
-    <div class="project-card reveal" data-category="iot automatique" data-album="album-miathon">
-      <div class="project-album">
-        <div class="album-slides" id="album-miathon-slides">
-          <div class="album-slide placeholder">
-            <div class="ph-icon">🏆</div>
-            <div class="ph-label">1ère Place · Hackathon Miathon'03</div>
-            <div class="ph-sub">IoT Médical & Diagnostic par l'Haleine</div>
-            <input type="file" accept="image/*" onchange="addSlideP
+const idx = {}; let lbList = [], lbPos = 0;
+function updateAlbum(id) {
+  const el = document.getElementById(id + '-slides'), n = el.children.length, i = idx[id] || 0;
+  el.style.transform = `translateX(-${i * 100}%)`;
+  document.querySelectorAll(`#${id}-dots .album-dot`).forEach((d, k) => d.classList.toggle('active', k === i));
+  document.getElementById(id + '-counter').textContent = `${i + 1} / ${n}`;
+}
+const goSlide = (id, i) => { idx[id] = i; updateAlbum(id); };
+const nextSlide = id => goSlide(id, ((idx[id] || 0) + 1) % document.getElementById(id + '-slides').children.length);
+const prevSlide = id => { const n = document.getElementById(id + '-slides').children.length; goSlide(id, ((idx[id] || 0) - 1 + n) % n); };
+
+function addSlidePhoto(input, id, i) {
+  const f = input.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = e => {
+    const s = document.getElementById(id + '-slides').children[i];
+    s.className = 'album-slide';
+    s.innerHTML = `<img src="${e.target.result}" alt="">`;
+    s.querySelector('img').onclick = () => { lbList = [...document.getElementById(id + '-slides').querySelectorAll('img')].map(x => x.src); lbPos = Math.max(0, lbList.indexOf(e.target.result)); showLb(); };
+  };
+  r.readAsDataURL(f);
+}
+function showLb() { if (!lbList.length) return; document.getElementById('lbImg').src = lbList[lbPos]; document.getElementById('lightbox').classList.add('open'); }
+function openLightboxSingle(src) { lbList = [src]; lbPos = 0; showLb(); }
+function lbStep(d) { if (lbList.length) { lbPos = (lbPos + d + lbList.length) % lbList.length; showLb(); } }
+function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
+document.getElementById('lightbox').addEventListener('click', e => { if (e.target.id === 'lightbox') closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); if (e.key === 'ArrowRight') lbStep(1); if (e.key === 'ArrowLeft') lbStep(-1); });
+
+function filterProjects(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.project-card').forEach(c => { c.style.display = (cat === 'all' || c.dataset.category.split(' ').includes(cat)) ? '' : 'none'; });
+}
+
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } }), { threshold: .1 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
