@@ -21,9 +21,11 @@ Plain HTML, CSS and JavaScript in a single file, with no framework and no build 
 ├── index.html
 ├── README.md
 └── images/
-    ├── me.jpg
+    ├── me
     ├── forest fire detection
-    └── SmartHome
+    ├── SmartHome
+    ├── Dashboard_clodchain
+    └── historique_incident_coldchain
 ```
 
 All photos live in the `images/` folder. The file names must match the ones used in `index.html`, otherwise the photos will not display.
@@ -38,7 +40,7 @@ All photos live in the `images/` folder. The file names must match the ones used
 - **Skills and projects** are defined in the `SKILLS` and `PROJECTS` lists at the bottom of `index.html`. Edit the text there, and the page updates automatically.
 - **Add a project** by copying an existing entry in `PROJECTS` and changing its `id`, `cat`, `title`, `desc`, `tags` and `slides`.
 - **Project photos:** put the image in the `images/` folder, then add a fourth value to a slide with just the file name, for example `['📷','Prototype','','my-photo.jpg']`. The `images/` path is added automatically (it is set once by `IMG_DIR` in the script). Without the fourth value, the slide shows an upload placeholder.
-- **Profile photo:** replace `images/me.jpg` with your own picture, keeping the same name.
+- **Profile photo:** replace `images/me` with your own picture, keeping the same name.
 - **Filter categories** are `robotics`, `iot` and `control`. Set them in the `cat` field of each project, separated by spaces.
 
 > Photos added through the on-page upload placeholders only exist in the visitor's browser. They disappear on refresh and are not visible to other visitors. Add the image files to the repository and reference them as described above to keep them.
