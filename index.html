@@ -178,10 +178,10 @@ footer{padding:28px 60px;border-top:1px solid var(--border);display:flex;justify
     <div class="hero-photo-frame"><img src="images/me" alt="Ibtissame Abdoussi" onerror="if(!this.dataset.retry){this.dataset.retry=1;this.src='images/me.jpg'}" onclick="openLightboxSingle(this.src)"></div>
   </div>
   <div class="hero-content">
-    <div class="hero-tag">Seeking a 5-month end-of-studies internship (PFE)</div>
+    <div class="hero-tag">Seeking a 5-month end-of-studies internship (PFE) · starting February 2027 · open to relocation</div>
     <h1 class="hero-name">Ibtissame<br><span>Abdoussi</span></h1>
     <p class="hero-title">// 5th-year Engineering Student · Embedded Systems, IoT & Robotics</p>
-    <p class="hero-desc">5th-year engineering student at ENSA Oujda (GSEIR), specialized in embedded systems, IoT and robotics, with hands-on experience in condition-based maintenance and industrial IoT at <strong>OCP Group</strong>, in robotics under <strong>ROS/ROS2</strong>, and in mechatronic design.</p>
+    <p class="hero-desc">5th-year engineering student at ENSA Oujda (GSEIR), specialized in embedded systems, IoT and robotics, with hands-on experience in condition-based maintenance and industrial IoT at <strong>OCP Group</strong>, in robotics under <strong>ROS/ROS2</strong>, and in mechatronic design. I work from requirements to tested results: I design, test, measure and fix. I also have a strong interest in the automotive industry (CAN, embedded software requirements, verification and validation) and in embedded AI (first place at Miathon'03).</p>
     <div class="hero-actions">
       <a href="#projects" class="btn-primary">See my projects</a>
       <a href="mailto:ibtissam.abdoussi.23@ump.ac.ma" class="btn-ghost">Contact me</a>
@@ -209,7 +209,7 @@ footer{padding:28px 60px;border-top:1px solid var(--border);display:flex;justify
     <ul class="exp-list">
       <li><strong>Vibration and thermal monitoring:</strong> studied and simulated a real-time monitoring system for conveyor drive heads, using signal processing (<strong>FFT, RMS, Kurtosis</strong>) for early detection and diagnosis of mechanical anomalies.</li>
       <li><strong>IoT supervision architecture:</strong> designed the full telemetry chain <em>sensors → MQTT → InfluxDB (time series) → Grafana</em>, with an interactive real-time dashboard for maintenance teams.</li>
-      <li><strong>Digitalization & improvement methods:</strong> developed a web application that centralizes data and generates daily production reports; carried out an <strong>ADMEC</strong> study and applied the <strong>DMAIC</strong> problem-solving method.</li>
+      <li><strong>Digitalization & improvement methods:</strong> developed a web application that centralizes data and automatically generates daily production reports, replacing manual report writing; carried out an <strong>ADMEC</strong> study and applied the <strong>DMAIC</strong> problem-solving method.</li>
     </ul>
     <div class="exp-tags">
       <span class="tag tag-teal">Industrial IoT</span><span class="tag tag-teal">MQTT</span><span class="tag tag-teal">InfluxDB</span><span class="tag tag-teal">Grafana</span>
@@ -253,8 +253,8 @@ footer{padding:28px 60px;border-top:1px solid var(--border);display:flex;justify
   <div class="section-header reveal"><span class="section-num">05 /</span><h2 class="section-title">Activities, Languages & Interests</h2><div class="section-line"></div></div>
   <div class="act-grid">
     <div class="act-card reveal"><div class="act-role">Head of the Media Team</div><div class="act-org">GSEIR Club</div><div class="act-period">2025 – 2026</div><p class="act-desc">Organized robotics/IoT workshops, led a team and took part in competitions.</p></div>
-    <div class="act-card reveal"><div class="act-role">Educational Facilitator</div><div class="act-org">Maison des Sciences Orientale (MSO)</div><p class="act-desc" style="margin-top:12px">Interactive workshops introducing children to science and technology.</p></div>
-    <div class="act-card reveal"><div class="act-role">Active Member</div><div class="act-org">Sports Club</div><div class="act-period">2022 – present</div><p class="act-desc">Organized sports events and hosted the 2024 inter-university tournament ceremony.</p></div>
+    <div class="act-card reveal"><div class="act-role">Educational Facilitator</div><div class="act-org">Maison des Sciences Orientale (MSO)</div><div class="act-period">2023 – 2026</div><p class="act-desc">Interactive workshops introducing children to science and technology.</p></div>
+    <div class="act-card reveal"><div class="act-role">Active Member</div><div class="act-org">ENSAO Sports Club</div><div class="act-period">2022 – present</div><p class="act-desc">Organized sports events and hosted the 2024 inter-university tournament ceremony.</p></div>
   </div>
   <div class="lang-grid reveal">
     <div class="lang-card"><div class="lang-flag">🇲🇦</div><div class="lang-name">Arabic</div><div class="lang-level">Native</div></div>
@@ -273,11 +273,11 @@ footer{padding:28px 60px;border-top:1px solid var(--border);display:flex;justify
 <section id="contact">
   <div class="contact-inner reveal">
     <h2 class="contact-title">Let’s work <span>together</span></h2>
-    <p class="contact-sub">I’m looking for a 5-month end-of-studies internship in embedded systems, IoT or robotics.</p>
+    <p class="contact-sub">I’m looking for a 5-month end-of-studies internship in embedded systems, IoT or robotics (also automotive embedded software and V&V), starting February 2027.</p>
     <div class="contact-links">
       <a class="contact-link" href="mailto:ibtissam.abdoussi.23@ump.ac.ma">✉ ibtissam.abdoussi.23@ump.ac.ma</a>
       <a class="contact-link" href="tel:+212664520040">📞 0664520040</a>
-      <span class="contact-link">📍 Oujda, Morocco</span>
+      <span class="contact-link">📍 Oujda, Morocco · Open to relocation</span>
     </div>
   </div>
 </section>
@@ -299,12 +299,14 @@ const IMG_DIR = 'images/'; // folder that holds all project photos
 const tg = s => { const [c, t] = s.split('|'); return `<span class="tag ${{t:'tag-teal',a:'tag-amber',n:''}[c]}">${t}</span>`; };
 
 const SKILLS = [
-  ['🔌','Embedded Systems & Electronics','Microcontrollers, hardware architectures and interfacing',['t|C / C++ (embedded)','t|PIC16F / PIC18F','t|ESP32 / ESP8266','t|Raspberry Pi 4','n|Sensors & Actuators']],
+  ['🔌','Embedded Systems & Electronics','Microcontrollers, hardware architectures and interfacing',['t|C / C++ (embedded)','t|PIC16F / PIC18F','t|ESP32 / ESP8266','t|Raspberry Pi 4','n|Sensors & Actuators','a|CAN','a|UART','a|I2C','a|SPI']],
   ['🛠️','Electronic Design & CAD','From schematic to PCB routing and 3D modeling',['a|Proteus','a|EasyEDA','a|Fusion 360 (3D CAD)','n|KiCad (basics)','n|Tinkercad']],
-  ['🤖','Robotics, Vision & Control','Autonomous robotics, kinematics, computer vision and feedback control',['t|ROS1 / ROS2','t|OpenCV & cv_bridge','a|MATLAB / Simulink','n|Kinematics (IGM/DGM)','n|PID Control']],
-  ['💻','Programming & Systems','Object-oriented development, operating systems and protocols',['t|Python','t|Java','n|Object-Oriented Programming','n|Linux (files, users, memory, processes)','a|MQTT','n|REST API']],
+  ['🤖','Robotics, Vision & Control','Autonomous robotics, kinematics, computer vision and feedback control',['t|ROS1 / ROS2','t|OpenCV & cv_bridge','a|MATLAB / Simulink','n|Kinematics (IGM/DGM)','n|PID Control','n|Denavit–Hartenberg (FKM/IKM)']],
+  ['💻','Programming & Systems','Object-oriented development, operating systems and protocols',['t|Python','t|Java','n|Object-Oriented Programming','n|Linux (Ubuntu, Raspberry Pi; files, users, memory, processes)','a|MQTT','n|REST API','n|SQL (basics)','n|Web application','n|Task automation']],
   ['⚡','Digital Design & Low Level','Hardware description and programming close to the silicon',['a|VHDL','a|Verilog','t|Assembly']],
   ['🏭','Industrial Automation','PLC programming and process control',['t|Programmable Logic Controllers (PLC)','a|TIA Portal','n|Ladder Language (LD)','n|GRAFCET']],
+  ['🌐','IoT, Networking & Supervision','Telemetry pipelines, monitoring and network protocols',['t|MQTT','t|InfluxDB','t|Grafana','n|TCP/IP','n|Ethernet','n|Wi-Fi','n|REST API','n|Supervision & monitoring']],
+  ['✅','Verification & Validation','Requirements-driven testing and fail-safe design',['t|Test planning','t|Benchmarking (accuracy & latency)','a|Anomaly diagnosis','a|Fail-safe design','n|Requirements-driven validation plans','n|Root cause analysis','n|DMAIC']],
   ['📊','Data Processing & Analysis','Signal processing, image processing and machine learning',['t|Signal Processing (FFT, RMS, Kurtosis)','t|Image Processing','a|Machine Learning (MLP)']]
 ];
 
@@ -321,13 +323,13 @@ const PROJECTS = [
    slides:[['👁️','Line-following robot · ROS vision','Click to add a photo'],['📷','Experimental results & trajectory','Click to add a photo']]},
   {id:'miathon',cat:'iot control',badge:'🏆 1st place · Miathon\'03',num:'P.03',date:'04/2026 – 06/2026',
    title:'Chronic disease diagnosis system using breath analysis',
-   desc:`Project awarded first place at Miathon'03.<br>• Design of an embedded system for early diagnosis of chronic diseases.<br>• Analysis of gas biomarkers and data processing.`,
-   tags:['t|Embedded system','t|Multi-gas sensors','a|AI','n|Signal processing','n|Medical IoT'],
+   desc:`Project awarded first place at Miathon'03.<br>• Design of an embedded system for early diagnosis of chronic diseases.<br>• Analysis of gas biomarkers and data processing.<br>• ESP32-based system with a multi-gas sensor for gaseous biomarker acquisition, signal processing and analysis.<br>• Explored AI-based approaches for intelligent data analysis.`,
+   tags:['t|ESP32','t|Embedded system','t|Multi-gas sensors','a|AI','n|Signal processing','n|Medical IoT'],
    slides:[['🏆','1st place · Miathon\'03 hackathon','Click to add a photo'],['🫁','Prototype & multi-gas sensors','Click to add a photo']]},
   {id:'dofbot',cat:'robotics control',badge:'End-of-year project (PFA)',num:'P.04',date:'03/2026 – 07/2026',
    title:'Modeling and control of a 6-axis robotic arm (DOFBOT Pi)',
-   desc:`• Development of a <strong>ROS1</strong> architecture and comparison of DGM/IGM models.<br>• Evaluation of accuracy and computation time.`,
-   tags:['t|ROS1','t|Raspberry Pi 4','t|Python','a|Machine Learning (MLP)','n|IGM / DGM','n|Robotics'],
+   desc:`• Development of a <strong>ROS1</strong> architecture and comparison of DGM/IGM models.<br>• Evaluation of accuracy and computation time.<br>• Forward kinematics (<strong>Denavit–Hartenberg</strong>) and two inverse-kinematics solvers in Python on Raspberry Pi 4 (Ubuntu, ROS), driving the servos through the <strong>Arm_Lib</strong> library.<br>• Hybrid analytical solver: &lt; 0.5 cm in ~0.5–2 s. MLP solver trained on <strong>300,000 synthetic samples</strong>: &lt; 1 cm and ~10× faster.<br>• Verified the forward model against measured positions, then found and corrected a gripper-length projection error that caused over 30% position error above 60° wrist tilt.`,
+   tags:['t|ROS1','t|Raspberry Pi 4','t|Python','a|Machine Learning (MLP)','n|IGM / DGM','n|Robotics','n|Denavit–Hartenberg','n|Arm_Lib','n|Ubuntu'],
    slides:[['🦾','6-axis robotic arm · DOFBOT Pi','Click to add a photo'],['📈','DGM / IGM comparison & MLP','Click to add a photo']]},
   {id:'matlab',cat:'control',badge:'Academic project · Control',num:'P.05',date:'04/2025 – 06/2025',
    title:'Optimization and control of dynamic systems with MATLAB/Simulink',
